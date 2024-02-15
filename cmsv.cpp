@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#include <algorithm> // for sorting
+#include <algorithm> // rusiavimui medianai
 
 using namespace std;
 
@@ -11,27 +11,27 @@ struct Student {
     int* grades;
     int exam_results;
 
-    // Constructor to initialize grades pointer to nullptr
+    
     Student() : grades(nullptr) {}
 };
 
-// Function to calculate median
+// mediana
 double calculateMedian(int arr[], int size) {
-    sort(arr, arr + size); // Sort the array
+    sort(arr, arr + size); // rusiuojam
 
-    if (size % 2 != 0) // If size is odd
+    if (size % 2 != 0) // jei nelyginis
         return arr[size / 2];
-    else // If size is even
+    else // jei lyginis
         return (arr[size / 2 - 1] + arr[size / 2]) / 2.0;
 }
 
-// Function to enter data manually
+// ranka ivesti duomenis
 void enterDataManually(Student students[], int s, double hw) {
     for (int i = 0; i < s; ++i) {
         cout << "Enter " << i + 1 << " student's name and surname: ";
         cin >> students[i].name >> students[i].sur;
 
-        // Dynamically allocate memory for grades array
+        // dinamine pazymiu masyvui
         students[i].grades = new int[static_cast<int>(hw)];
         double total_grades = 0.0;
 
@@ -46,13 +46,13 @@ void enterDataManually(Student students[], int s, double hw) {
             total_grades += students[i].grades[j];
         }
 
-        // Calculate final average
+        // vidurkis
         students[i].final_avg = total_grades / hw;
 
-        // Calculate median
+        // mediana
         students[i].median = calculateMedian(students[i].grades, hw);
 
-        // Enter exam result
+        // ivedam egzo rezultatus
         do {
             cout << "Enter " << i + 1 << " student's exam grade: ";
             cin >> students[i].exam_results;
@@ -61,66 +61,66 @@ void enterDataManually(Student students[], int s, double hw) {
             }
         } while (students[i].exam_results < 1 || students[i].exam_results > 10);
 
-        // Calculate final average with exam result
+        // skaiciuojam vidurki su egzo rez
         students[i].final_avg = 0.4 * students[i].final_avg + 0.6 * students[i].exam_results;
     }
 }
 
-// Function to generate random grades
+// randominiam pazymiam
 void generateRandomGrades(Student students[], int s, double hw) {
     for (int i = 0; i < s; ++i) {
-        // Dynamically allocate memory for grades array
+        // dinamine pazymiu masyvui
         students[i].grades = new int[static_cast<int>(hw)];
         double total_grades = 0.0;
 
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
+            students[i].grades[j] = rand() % 10 + 1; // randominiai paz
             total_grades += students[i].grades[j];
         }
 
-        // Calculate final average
+        // galut vidurk
         students[i].final_avg = total_grades / hw;
 
-        // Calculate median
+        // medianaaa
         students[i].median = calculateMedian(students[i].grades, hw);
 
-        // Generate random exam result
+        // generuojam random egzu rez
         students[i].exam_results = rand() % 10 + 1;
 
-        // Calculate final average with exam result
+        // galutinis vid su egz
         students[i].final_avg = 0.4 * students[i].final_avg + 0.6 * students[i].exam_results;
     }
 }
 
-// Function to generate random names, surnames, and grades
+// random vardai pavardes ir pazymiai
 void generateRandomData(Student students[], int s, double hw) {
     string first_names[] = {"Jonas", "Ema", "Mikas", "Greta", "Vilius", "Sofija", "Tomas", "Eva", "Benas", "Izabelė"};
     string last_names[] = {"Pavardukas", "Pavardelis", "Pavardyte", "Pavardenis", "Pavardenaite", "Pavardyte", "Pavardaite", "Pavardis", "Pavpav", "Pavardeliukas"};
 
     for (int i = 0; i < s; ++i) {
-        // Generate random name and surname
+        // vardas pavarde randominiai
         students[i].name = first_names[rand() % 10];
         students[i].sur = last_names[rand() % 10];
 
-        // Dynamically allocate memory for grades array
+        // dinamiskai masyvas pazymiam
         students[i].grades = new int[static_cast<int>(hw)];
         double total_grades = 0.0;
 
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
+            students[i].grades[j] = rand() % 10 + 1; // randominis greidas
             total_grades += students[i].grades[j];
         }
 
-        // Calculate final average
+        // galut vidurk
         students[i].final_avg = total_grades / hw;
 
-        // Calculate median
+        // mmmeedianute
         students[i].median = calculateMedian(students[i].grades, hw);
 
-        // Generate random exam result
+        // randominis rezultats
         students[i].exam_results = rand() % 10 + 1;
 
-        // Calculate final average with exam result
+        // galutinis su egzu
         students[i].final_avg = 0.4 * students[i].final_avg + 0.6 * students[i].exam_results;
     }
 }
@@ -157,19 +157,19 @@ int main() {
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
 
-                // Dynamically allocate memory for array of Student objects
+                // dinamiskai masyvas studentam
                 Student* students = new Student[s];
 
-                // Call function to enter data manually
+                // kvieciam fja kad ranka ivest
                 enterDataManually(students, s, hw);
                 cout << "Data entered manually successfully." << endl;
 
-                // Ask whether to show median or final average
+                // ka rodyt jums gerbiamasai?
                 char displayChoice;
                 cout << "Do you want to see the final average (A) or the median (M)? ";
                 cin >> displayChoice;
 
-                // Display data
+                // prasom ziurekit
                 cout << left << setw(20) << "Name" << setw(20) << "Surname";
                 if (displayChoice == 'A' || displayChoice == 'a')
                     cout << setw(20) << "Final Average";
@@ -187,12 +187,12 @@ int main() {
                     cout << endl;
                 }
 
-                // Deallocate memory for each student's grades array
+                // trinam lauk
                 for (int i = 0; i < s; ++i) {
                     delete[] students[i].grades;
                 }
 
-                // Deallocate memory for array of Student objects
+                // trinam lauk
                 delete[] students;
                 break;
             }
@@ -213,19 +213,19 @@ int main() {
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
 
-                // Dynamically allocate memory for array of Student objects
+                // dinamiskai skiriam
                 Student* students = new Student[s];
 
-                // Call function to generate random grades
+                // kvieciam kad random generuotu pazymius
                 generateRandomGrades(students, s, hw);
                 cout << "Random grades generated successfully." << endl;
 
-                // Ask whether to show median or final average
+                // ka rodom
                 char displayChoice;
                 cout << "Do you want to see the final average (A) or the median (M)? ";
                 cin >> displayChoice;
 
-                // Display data
+                // ziurekite prasom
                 if (displayChoice == 'A' || displayChoice == 'a')
                     cout << setw(20) << fixed << "Final Average";
                 else if (displayChoice == 'M' || displayChoice == 'm')
@@ -241,12 +241,12 @@ int main() {
                     cout << endl;
                 }
 
-                // Deallocate memory for each student's grades array
+                // trinam lauk
                 for (int i = 0; i < s; ++i) {
                     delete[] students[i].grades;
                 }
 
-                // Deallocate memory for array of Student objects
+                // vel gi trinam lauk
                 delete[] students;
                 break;
             }
@@ -267,19 +267,19 @@ int main() {
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
 
-                // Dynamically allocate memory for array of Student objects
+                // duodam vieta
                 Student* students = new Student[s];
 
-                // Call function to generate random data
+                // kvieciam fja kad random pageneruotu
                 generateRandomData(students, s, hw);
                 cout << "Random data generated successfully." << endl;
 
-                // Ask whether to show median or final average
+                // a ka rodom
                 char displayChoice;
                 cout << "Do you want to see the final average (A) or the median (M)? ";
                 cin >> displayChoice;
 
-                // Display data
+                // ziuuurim
                 cout << left << setw(20) << "Name" << setw(20) << "Surname";
                 if (displayChoice == 'A' || displayChoice == 'a')
                     cout << setw(20) << "Final Average";
@@ -297,12 +297,12 @@ int main() {
                     cout << endl;
                 }
 
-                // Deallocate memory for each student's grades array
+                // trinam
                 for (int i = 0; i < s; ++i) {
                     delete[] students[i].grades;
                 }
 
-                // Deallocate memory for array of Student objects
+                // trinam
                 delete[] students;
                 break;
             }
