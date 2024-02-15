@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-#include <algorithm> // for sorting
+#include <algorithm> 
 #include <vector>
 
 using namespace std;
@@ -13,18 +13,16 @@ struct Student {
     int exam_results;
 };
 
-// Function to calculate median
 double calculateMedian(vector<int>& arr) {
-    sort(arr.begin(), arr.end()); // Sort the vector
+    sort(arr.begin(), arr.end()); // rusiuojam
 
     int size = arr.size();
-    if (size % 2 != 0) // If size is odd
+    if (size % 2 != 0) 
         return arr[size / 2];
-    else // If size is even
+    else 
         return (arr[size / 2 - 1] + arr[size / 2]) / 2.0;
 }
 
-// Function to enter data manually
 void enterDataManually(vector<Student>& students, double hw) {
     for (int i = 0; i < students.size(); ++i) {
         cout << "Enter " << i + 1 << " student's name and surname: ";
@@ -59,14 +57,14 @@ void enterDataManually(vector<Student>& students, double hw) {
     }
 }
 
-// Function to generate random grades
+
 void generateRandomGrades(vector<Student>& students, double hw) {
     for (int i = 0; i < students.size(); ++i) {
         students[i].grades.resize(static_cast<int>(hw));
         double total_grades = 0.0;
 
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
+            students[i].grades[j] = rand() % 10 + 1; // rand pazymys
             total_grades += students[i].grades[j];
         }
 
@@ -79,7 +77,7 @@ void generateRandomGrades(vector<Student>& students, double hw) {
     }
 }
 
-// Function to generate random names, surnames, and grades
+
 void generateRandomData(vector<Student>& students, double hw) {
     string first_names[] = {"Jonas", "Ema", "Mikas", "Greta", "Vilius", "Sofija", "Tomas", "Eva", "Benas", "Izabelė"};
     string last_names[] = {"Pavardukas", "Pavardelis", "Pavardyte", "Pavardenis", "Pavardenaite", "Pavardyte", "Pavardaite", "Pavardis", "Pavpav", "Pavardeliukas"};
@@ -92,7 +90,7 @@ void generateRandomData(vector<Student>& students, double hw) {
         double total_grades = 0.0;
 
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
+            students[i].grades[j] = rand() % 10 + 1; 
             total_grades += students[i].grades[j];
         }
 
