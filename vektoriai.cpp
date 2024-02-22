@@ -1,11 +1,12 @@
 #include <iostream>
-#include <fstream> // for file handling
+#include <fstream>
 #include <cmath>
 #include <iomanip>
-#include <algorithm> // for sorting
+#include <algorithm>
 #include <vector>
 #include <sstream>
 #include <numeric>
+#include <chrono>
 
 using namespace std;
 
@@ -16,18 +17,31 @@ struct Student {
     int exam_results;
 };
 
-// Function to calculate median
 double calculateMedian(vector<int>& arr) {
-    sort(arr.begin(), arr.end()); // Sort the vector
-
+    sort(arr.begin(), arr.end());
     int size = arr.size();
-    if (size % 2 != 0) // If size is odd
+    if (size % 2 != 0)
         return arr[size / 2];
-    else // If size is even
+    else
         return (arr[size / 2 - 1] + arr[size / 2]) / 2.0;
 }
 
-// Function to read data from file
+bool compareByName(const Student& a, const Student& b) {
+    return a.name < b.name;
+}
+
+bool compareBySurname(const Student& a, const Student& b) {
+    return a.sur < b.sur;
+}
+
+bool compareByMedian(const Student& a, const Student& b) {
+    return a.median < b.median;
+}
+
+bool compareByAvg(const Student& a, const Student& b) {
+    return a.final_avg < b.final_avg;
+}
+
 void readDataFromFile(vector<Student>& students, double& hw, int N) {
     ifstream file;
     file.open("studentai10000.txt");
@@ -37,62 +51,65 @@ void readDataFromFile(vector<Student>& students, double& hw, int N) {
         return;
     }
 
-    // Skip the first line
     string line;
-    getline(file, line);
+    getline(file, line); // Skipping the first line
 
     int count = 0;
     while (getline(file, line) && count < N) {
         istringstream iss(line);
-        string name, surname;
-        vector<int> grades;
-        int examResult;
-
-        // Read name and surname
-        iss >> name >> surname;
-
-        // Read grades
+        Student student;
+        iss >> student.name >> student.sur;
         int grade;
         while (iss >> grade) {
-            grades.push_back(grade);
+            student.grades.push_back(grade);
         }
-
-        // The last element of the line is the exam result
-        examResult = grades.back();
-        grades.pop_back(); // Remove the exam result from grades
-
-        // Calculate final average and median
+        student.exam_results = student.grades.back();
+        student.grades.pop_back();
         double finalAvg = 0.0;
         double median = 0.0;
-
-        if (!grades.empty()) {
-            finalAvg = accumulate(grades.begin(), grades.end(), 0.0) / grades.size();
-            sort(grades.begin(), grades.end());
-            int size = grades.size();
+        if (!student.grades.empty()) {
+            finalAvg = accumulate(student.grades.begin(), student.grades.end(), 0.0) / student.grades.size();
+            sort(student.grades.begin(), student.grades.end());
+            int size = student.grades.size();
             if (size % 2 != 0)
-                median = grades[size / 2];
+                median = student.grades[size / 2];
             else
-                median = (grades[size / 2 - 1] + grades[size / 2]) / 2.0;
+                median = (student.grades[size / 2 - 1] + student.grades[size / 2]) / 2.0;
         }
-
-        // Store student data
-        Student student;
-        student.name = name;
-        student.sur = surname;
-        student.grades = grades;
-        student.exam_results = examResult;
         student.final_avg = finalAvg;
         student.median = median;
-
         students.push_back(student);
-
         count++;
     }
 
     file.close();
+
+    char sortChoice;
+    cout << "Sort by (N)ame, (S)urname, (M)edian or (A)verage: ";
+    cin >> sortChoice;
+    switch (sortChoice){
+        case 'N':
+        case 'n':
+            sort(students.begin(), students.end(), compareByName);
+            break;
+        case 'S':
+        case 's':
+            sort (students.begin(), students.end(), compareBySurname);
+            break;
+        case 'M':
+        case 'm':
+            sort (students.begin(), students.end(), compareByMedian);
+            break;
+        case 'A':
+        case 'a':
+            sort (students.begin(), students.end(), compareByAvg);
+            break;
+        default:
+            cout << "Invalid choice. Data will be displayed unsorted." << endl;
+            break;
+    }
 }
 
-// Function to enter data manually
 void enterDataManually(vector<Student>& students, double hw) {
     for (int i = 0; i < students.size(); ++i) {
         cout << "Enter " << i + 1 << " student's name and surname: ";
@@ -105,7 +122,11 @@ void enterDataManually(vector<Student>& students, double hw) {
             do {
                 cout << "Enter student's grades for " << j + 1 << " homework: ";
                 cin >> students[i].grades[j];
-                if (students[i].grades[j] < 1 || students[i].grades[j] > 10) {
+                if (cin.fail()) {
+                    cout << "Error: Please enter a valid number." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                } else if (students[i].grades[j] < 1 || students[i].grades[j] > 10) {
                     cout << "Error: Grade must be between 1 and 10." << endl;
                 }
             } while (students[i].grades[j] < 1 || students[i].grades[j] > 10);
@@ -118,7 +139,11 @@ void enterDataManually(vector<Student>& students, double hw) {
         do {
             cout << "Enter " << i + 1 << " student's exam grade: ";
             cin >> students[i].exam_results;
-            if (students[i].exam_results < 1 || students[i].exam_results > 10) {
+            if (cin.fail()) {
+                cout << "Error: Please enter a valid number." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            } else if (students[i].exam_results < 1 || students[i].exam_results > 10) {
                 cout << "Error: Grade must be between 1 and 10." << endl;
             }
         } while (students[i].exam_results < 1 || students[i].exam_results > 10);
@@ -127,27 +152,24 @@ void enterDataManually(vector<Student>& students, double hw) {
     }
 }
 
-// Function to generate random grades
 void generateRandomGrades(vector<Student>& students, double hw) {
     for (int i = 0; i < students.size(); ++i) {
+        // Generate random grades
         students[i].grades.resize(static_cast<int>(hw));
-        double total_grades = 0.0;
-
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
-            total_grades += students[i].grades[j];
+            students[i].grades[j] = rand() % 10 + 1;
         }
 
-        students[i].final_avg = total_grades / hw;
-        students[i].median = calculateMedian(students[i].grades);
-
+        // Generate random exam result
         students[i].exam_results = rand() % 10 + 1;
 
-        students[i].final_avg = 0.4 * students[i].final_avg + 0.6 * students[i].exam_results;
+        // Calculate final average and median
+        double total_grades = accumulate(students[i].grades.begin(), students[i].grades.end(), 0.0);
+        students[i].final_avg = (total_grades / hw) * 0.4 + (students[i].exam_results) * 0.6;
+        students[i].median = calculateMedian(students[i].grades);
     }
 }
 
-// Function to generate random names, surnames, and grades
 void generateRandomData(vector<Student>& students, double hw) {
     string first_names[] = {"Jonas", "Ema", "Mikas", "Greta", "Vilius", "Sofija", "Tomas", "Eva", "Benas", "Izabelė"};
     string last_names[] = {"Pavardukas", "Pavardelis", "Pavardyte", "Pavardenis", "Pavardenaite", "Pavardyte", "Pavardaite", "Pavardis", "Pavpav", "Pavardeliukas"};
@@ -160,7 +182,7 @@ void generateRandomData(vector<Student>& students, double hw) {
         double total_grades = 0.0;
 
         for (int j = 0; j < hw; ++j) {
-            students[i].grades[j] = rand() % 10 + 1; // Generate random grade
+            students[i].grades[j] = rand() % 10 + 1;
             total_grades += students[i].grades[j];
         }
 
@@ -183,7 +205,7 @@ int main() {
     do {
         cout << "Menu:" << endl;
         cout << "1. Enter data manually" << endl;
-        cout << "2. Generate random grades" << endl;
+        cout << "2. Enter names and surnames manually and then generate random grades" << endl;
         cout << "3. Generate random names, surnames, and grades" << endl;
         cout << "4. Read data from file" << endl;
         cout << "5. End the program" << endl;
@@ -232,21 +254,29 @@ int main() {
                 cout << "How much homework? ";
                 cin >> hw;
 
+                // Only enter names and surnames manually
+                for (int i = 0; i < students.size(); ++i) {
+                    cout << "Enter " << i + 1 << " student's name and surname: ";
+                    cin >> students[i].name >> students[i].sur;
+                }
+
+                // Generate random grades
                 generateRandomGrades(students, hw);
-                cout << "Random grades generated successfully." << endl;
 
                 char displayChoice;
                 cout << "Do you want to see the final average (A) or the median (M)? ";
                 cin >> displayChoice;
 
+                cout << left << setw(20) << "Name" << setw(20) << "Surname";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << fixed << "Final Average";
+                    cout << setw(20) << "Final Average";
                 else if (displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << fixed << "Median";
+                    cout << setw(20) << "Median";
                 cout << endl;
 
-                cout << "----------------------------" << endl;
+                cout << "------------------------------------------------------------" << endl;
                 for (int i = 0; i < students.size(); i++) {
+                    cout << left << setw(20) << students[i].name << setw(20) << students[i].sur;
                     if (displayChoice == 'A' || displayChoice == 'a')
                         cout << setw(20) << fixed << setprecision(2) << students[i].final_avg;
                     else if (displayChoice == 'M' || displayChoice == 'm')
@@ -293,7 +323,6 @@ int main() {
                 cout << "Enter how many data entries you want to read: ";
                 cin >> N;
 
-                // Read data from file
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
