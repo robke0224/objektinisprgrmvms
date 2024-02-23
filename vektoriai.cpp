@@ -27,11 +27,11 @@ double calculateMedian(vector<int>& arr) {
 }
 
 bool compareByName(const Student& a, const Student& b) {
-    return a.name < b.name;
+    return stoi(a.name.substr(6,1)) < stoi(b.name.substr(6,1));
 }
 
 bool compareBySurname(const Student& a, const Student& b) {
-    return a.sur < b.sur;
+    return stoi(a.sur.substr(7,1)) < stoi(b.sur.substr(7,1));
 }
 
 bool compareByMedian(const Student& a, const Student& b) {
@@ -207,8 +207,9 @@ int main() {
         cout << "1. Enter data manually" << endl;
         cout << "2. Enter names and surnames manually and then generate random grades" << endl;
         cout << "3. Generate random names, surnames, and grades" << endl;
-        cout << "4. Read data from file" << endl;
-        cout << "5. End the program" << endl;
+        cout << "4. Read data from file and print data on screen" << endl;
+        cout << "5. Read data from file and create a file for results" << endl;
+        cout << "6. End the program" << endl;
         cout << "Choose an option: ";
         cin >> choice;
 
@@ -303,17 +304,19 @@ int main() {
                 cout << left << setw(20) << "Name" << setw(20) << "Surname";
                 if (displayChoice == 'A' || displayChoice == 'a')
                     cout << setw(20) << "Final Average";
-                else if (displayChoice == 'M' || displayChoice == 'm')
+                else if(displayChoice == 'M' || displayChoice == 'm')
                     cout << setw(20) << "Median";
                 cout << endl;
 
                 cout << "------------------------------------------------------------" << endl;
                 for (int i = 0; i < students.size(); i++) {
                     cout << left << setw(20) << students[i].name << setw(20) << students[i].sur;
-                    if (displayChoice == 'A' || displayChoice == 'a')
+                    if (displayChoice == 'A' || displayChoice == 'a'){
                         cout << setw(20) << fixed << setprecision(2) << students[i].final_avg;
-                    else if (displayChoice == 'M' || displayChoice == 'm')
+                    }
+                    else{
                         cout << setw(20) << fixed << setprecision(2) << students[i].median;
+                    }
                     cout << endl;
                 }
                 break;
@@ -347,7 +350,41 @@ int main() {
                 }
                 break;
             }
-            case '5': {
+            case '5':{
+                ofstream out_file ("results.txt");
+                if (!out_file){
+                    cout << "error opening the file" << endl;
+                }
+                int N;
+                cout << "Enter how many data entries you want to read: ";
+                cin >> N;
+
+                readDataFromFile(students, hw, N);
+
+                char displayChoice;
+                cout << "Do you want to see the final average (A) or the median (M)? ";
+                cin >> displayChoice;
+
+                out_file << left << setw(20) << "Name" << setw(20) << "Surname";
+                if (displayChoice == 'A' || displayChoice == 'a')
+                    out_file << setw(20) << "Final Average";
+                else if (displayChoice == 'M' || displayChoice == 'm')
+                    out_file << setw(20) << "Median";
+                out_file << endl;
+
+                out_file << "------------------------------------------------------------" << endl;
+                for (int i = 0; i < students.size(); i++) {
+                    out_file << left << setw(20) << students[i].name << setw(20) << students[i].sur;
+                    if (displayChoice == 'A' || displayChoice == 'a')
+                        out_file << setw(20) << fixed << setprecision(2) << students[i].final_avg;
+                    else if (displayChoice == 'M' || displayChoice == 'm')
+                        out_file << setw(20) << fixed << setprecision(2) << students[i].median;
+                    out_file << endl;
+                }
+                break;
+
+            }
+            case '6': {
                 cout << "Ending the program." << endl;
                 break;
             }
