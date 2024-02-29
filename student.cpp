@@ -2,16 +2,16 @@
 
 void generateRandomGrades(vector<Student>& students, double hw) {
     for (int i = 0; i < students.size(); ++i) {
-        // Generate random grades
+        // random pazymiukai
         students[i].grades.resize(static_cast<int>(hw));
         for (int j = 0; j < hw; ++j) {
             students[i].grades[j] = rand() % 10 + 1;
         }
 
-        // Generate random exam result
+        // random egzas
         students[i].exam_results = rand() % 10 + 1;
 
-        // Calculate final average and median
+        // galutinio mediana arba vidurkis
         double total_grades = accumulate(students[i].grades.begin(), students[i].grades.end(), 0.0);
         students[i].final_avg = (total_grades / hw) * 0.4 + (students[i].exam_results) * 0.6;
         students[i].median = calculateMedian(students[i].grades);
