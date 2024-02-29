@@ -19,8 +19,8 @@ void generateRandomGrades(vector<Student>& students, double hw) {
 }
 
 void generateRandomData(vector<Student>& students, double hw) {
-    string first_names[] = {"Jonas", "Ema", "Mikas", "Greta", "Vilius", "Sofija", "Tomas", "Eva", "Benas", "Izabelė"};
-    string last_names[] = {"Pavardukas", "Pavardelis", "Pavardyte", "Pavardenis", "Pavardenaite", "Pavardyte", "Pavardaite", "Pavardis", "Pavpav", "Pavardeliukas"};
+    string first_names[] = {"Jonas", "Emanuelis", "Mikas", "Adomas", "Vilius", "Lukas", "Tomas", "Kasparas", "Benas", "Edas"};
+    string last_names[] = {"Pavardukas", "Pavardelis", "Pavardytelis", "Pavardenis", "Pavardziukas", "Pavv", "Pavardaitis", "Pavardis", "Pavpav", "Pavardeliukas"};
 
     for (int i = 0; i < students.size(); ++i) {
         students[i].name = first_names[rand() % 10];
@@ -58,7 +58,7 @@ void readDataFromFile(vector<Student>& students, double& hw, int N) {
         file.open("studentai10000.txt");
 
         if (!file) {
-            throw runtime_error("Error opening the file");
+            throw runtime_error("Nepavyko atidaryti failo");
         }
       string line;
       getline(file, line);
@@ -98,21 +98,21 @@ void readDataFromFile(vector<Student>& students, double& hw, int N) {
 void enterDataManually(vector<Student>& students, double hw) {
     try {
         for (int i = 0; i < students.size(); ++i) {
-            cout << "Enter " << i + 1 << " student's name and surname: ";
+            cout << "Iveskite " << i + 1 << " mokinio varda ir pavarde: ";
             cin >> students[i].name >> students[i].sur;
 
             students[i].grades.resize(static_cast<int>(hw));
             double total_grades = 0.0;
 
             for (int j = 0; j < hw; ++j) {
-                cout << "Enter student's grades for " << j + 1 << " homework: ";
+                cout << "Iveskite mokinio pazymius uz " << j + 1 << " namu darbus: ";
                 while (!(cin >> students[i].grades[j])|| students[i].grades[j] < 1 || students[i].grades[j] > 10){
                     if (!(cin >> students[i].grades[j])) {
-                        cout << "Error: Please enter a number." << endl;
+                        cout << "Klaida. Iveskite skaiciu." << endl;
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     }else if (students[i].grades[j] < 1 || students[i].grades[j] > 10) {
-                        cout << "Error: Grade must be between 1 and 10." << endl;
+                        cout << "Klaida. Skaicius privalo buti intervale nuo 1 iki 10." << endl;
                         cin.clear();
                         cin.ignore();
                     }
