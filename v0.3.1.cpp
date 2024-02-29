@@ -242,11 +242,13 @@ int main() {
             }
             default:{
                 cout << "Klaidingas pasirinkimas. Prasome irasyti tinkama skaiciu." << endl;
+                break;
             }
         }
      
 
-    return 0;
+    
 
-}while (choice != '6');
+    }while (choice != '6');
+return 0;
 }
