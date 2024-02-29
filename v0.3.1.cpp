@@ -9,51 +9,51 @@ int main() {
     vector<Student> students;
 
     do {
-        cout << "Menu:" << endl;
-        cout << "1. Enter data manually" << endl;
-        cout << "2. Enter names and surnames manually and then generate random grades" << endl;
-        cout << "3. Generate random names, surnames, and grades" << endl;
-        cout << "4. Read data from file and print data on screen" << endl;
-        cout << "5. Read data from file and create a file for results" << endl;
-        cout << "6. End the program" << endl;
-        cout << "Choose an option: ";
+        cout << "Meniu:" << endl;
+        cout << "1. Ivesti duomenis ranka" << endl;
+        cout << "2. Ivesti vardus ir pavardes ranka, o pazymius generuoti atsitiktinai" << endl;
+        cout << "3. Atsitiktinai generuoti viska" << endl;
+        cout << "4. Nuskaityti duomenis is failo ir duomenis isvesti terminale" << endl;
+        cout << "5. Nuskaityti duomenis is failo ir duomenis isvesti atskirame faile" << endl;
+        cout << "6. Uzbaigti programa" << endl;
+        cout << "Jusu pasirinkimas: ";
         cin >> choice;
 
              switch (choice) {
          case '1': {
-                 cout << "How many students in a group? ";
+                 cout << "Kiek studentu grupeje? ";
                  while (!(cin >> s)) {
-                cout << "Error: Please enter a valid number." << endl;
+                cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
                 students.resize(s);
 
-                 cout << "How much homework? ";
+                 cout << "Kiek namu darbu? ";
                  while (!(cin >> hw)) {
-                cout << "Error: Please enter a valid number." << endl;
+                cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
     
                  }
 
                     enterDataManually(students, hw);
-                    cout << "Data entered manually successfully." << endl;
+                    cout << "Duomys ranka ivesti sekmingai." << endl;
 
                     char displayChoice;
-                    cout << "Do you want to see the final average (A) or the median (M)? ";
+                    cout << "Norite matyt vidurki (A) ar mediana (M)? ";
                     cin >> displayChoice;
 
                     if (!(displayChoice == 'A' || displayChoice == 'a' || displayChoice == 'M' || displayChoice == 'm')) {
-                    cout << "Error: Invalid choice. Please enter 'A' or 'M'." << endl;
+                    cout << "Klaida. Neteisingas pasirinkimas. Iveskite'A' arba 'M'." << endl;
                     break;
                 }
 
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
+                cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << "Final Average";
+                    cout << setw(20) << "Vidurkis";
                 else if (displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << "Median";
+                    cout << setw(20) << "Mediana";
                     cout << endl;
 
                     cout << "------------------------------------------------------------" << endl;
@@ -74,17 +74,17 @@ int main() {
             double hw;
 
 
-            cout << "How many students in a group? ";
+            cout << "Kiek studentu grupeje? ";
             while (!(cin >> s) || s <= 0) {
-            cout << "Error: Please enter a valid number greater than 0." << endl;
+            cout << "Klaida. Iveskite skaiciu didesni uz 0." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
 
     
-            cout << "How much homework? ";
+            cout << "Kiek namu darbu? ";
             while (!(cin >> hw) || hw <= 0) {
-            cout << "Error: Please enter a valid number greater than 0." << endl;
+            cout << "Klaida. Iveskite skaiciu didesni uz 0." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -94,7 +94,7 @@ int main() {
 
     
             for (int i = 0; i < s; ++i) {
-                cout << "Enter " << i + 1 << " student's name and surname: ";
+                cout << "Iveskite " << i + 1 << " mokinio varda ir pavarde: ";
                 cin >> students[i].name >> students[i].sur;
         
         }
@@ -103,15 +103,15 @@ int main() {
 
     
             char displayChoice;
-            cout << "Do you want to see the final average (A) or the median (M)? ";
+            cout << "Norite matyt vidurki (A) ar mediana (M)? ";
             cin >> displayChoice;
 
     
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
+                cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
             if (displayChoice == 'A' || displayChoice == 'a')
-                cout << setw(20) << "Final Average";
+                cout << setw(20) << "Vidurkis";
             else if (displayChoice == 'M' || displayChoice == 'm')
-                cout << setw(20) << "Median";
+                cout << setw(20) << "Mediana";
                 cout << endl;
 
                 cout << "------------------------------------------------------------" << endl;
@@ -129,35 +129,35 @@ int main() {
 
 
             case '3': {
-                cout << "How many students in a group?";
+                cout << "Kiek studentu grupeje?";
                  while (!(cin >> s)) {
-                 cout << "Error: Please enter a valid number." << endl;
+                 cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                  cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
         
                 }
               students.resize(s);
 
-            cout << "How much homework? ";
+            cout << "Kiek namu darbu? ";
             while (!(cin >> hw)) {
-            cout << "Error: Please enter a valid number." << endl;
+            cout << "Klaida. Iveskite tinkama skaiciu." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         
                }
 
                 generateRandomData(students, hw);
-                cout << "Random data generated successfully." << endl;
+                cout << "Atsitikiniai duomenys sugeneruoti sekmingai." << endl;
 
                 char displayChoice;
-                cout << "Do you want to see the final average (A) or the median (M)? ";
+                cout << " Norite matyt vidurki (A) ar mediana (M)? ";
                 cin >> displayChoice;
 
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
+                cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << "Final Average";
+                    cout << setw(20) << "Vidurkis";
                 else if(displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << "Median";
+                    cout << setw(20) << "Mediana";
                 cout << endl;
 
                 cout << "------------------------------------------------------------" << endl;
@@ -175,20 +175,20 @@ int main() {
             }
             case '4': {
                 int N;
-                cout << "Enter how many data entries you want to read: ";
+                cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
                 cin >> N;
 
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
-                cout << "Do you want to see the final average (A) or the median (M)? ";
+                cout << " Norite matyt vidurki (A) ar mediana (M)? ";
                 cin >> displayChoice;
 
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
+                cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << "Final Average";
+                    cout << setw(20) << "Vidurkis";
                 else if (displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << "Median";
+                    cout << setw(20) << "Mediana";
                 cout << endl;
 
                 cout << "------------------------------------------------------------" << endl;
@@ -205,23 +205,23 @@ int main() {
             case '5':{
                 ofstream out_file ("results.txt");
                 if (!out_file){
-                    cout << "Error opening the file" << endl;
+                    cout << "Klaida. Nepavyko atidaryti failo." << endl;
                 }
                 int N;
-                cout << "Enter how many data entries you want to read: ";
+                cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
                 cin >> N;
 
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
-                cout << "Do you want to see the final average (A) or the median (M)? ";
+                cout << "Norite matyt vidurki (A) ar mediana (M)? ";
                 cin >> displayChoice;
 
-                out_file << left << setw(20) << "Name" << setw(20) << "Surname";
+                out_file << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    out_file << setw(20) << "Final Average";
+                    out_file << setw(20) << "Vidurkis";
                 else if (displayChoice == 'M' || displayChoice == 'm')
-                    out_file << setw(20) << "Median";
+                    out_file << setw(20) << "Mediana";
                 out_file << endl;
 
                 out_file << "------------------------------------------------------------" << endl;
@@ -237,11 +237,11 @@ int main() {
 
             }
             case '6': {
-                cout << "Ending the program." << endl;
+                cout << "Programa baigta." << endl;
                 break;
             }
             default:{
-                cout << "Invalid option. Please choose again." << endl;
+                cout << "Klaidingas pasirinkimas. Prasome irasyti tinkama skaiciu." << endl;
             }
         }
      
