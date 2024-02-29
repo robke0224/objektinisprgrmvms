@@ -157,21 +157,11 @@ void generateRandomGrades(vector<Student>& students, double hw) {
         // Generate random grades
         students[i].grades.resize(static_cast<int>(hw));
         for (int j = 0; j < hw; ++j) {
-            if (!(cin >> students[i].grades[j])) {
-                cout << "Error: Please enter a number." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
+            students[i].grades[j] = rand() % 10 + 1;
         }
 
         // Generate random exam result
-        do {
-            if (!(cin >> students[i].exam_results)) {
-                cout << "Error: Please enter a number." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-        } while (cin.fail() || students[i].exam_results < 1 || students[i].exam_results > 10);
+        students[i].exam_results = rand() % 10 + 1;
 
         // Calculate final average and median
         double total_grades = accumulate(students[i].grades.begin(), students[i].grades.end(), 0.0);
@@ -179,6 +169,7 @@ void generateRandomGrades(vector<Student>& students, double hw) {
         students[i].median = calculateMedian(students[i].grades);
     }
 }
+
 
 
 
@@ -274,45 +265,66 @@ int main() {
     break;
 }
 
-            case '2': {
-                cout << "How many students in a group? ";
-                cin >> s;
-                students.resize(s);
+          
+   case '2': {
+    int s;
+    double hw;
 
-                cout << "How much homework? ";
-                cin >> hw;
+    // Ask the user for the number of students in a group
+    cout << "How many students in a group? ";
+    while (!(cin >> s) || s <= 0) {
+        cout << "Error: Please enter a valid number greater than 0." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
-                // Only enter names and surnames manually
-                for (int i = 0; i < students.size(); ++i) {
-                    cout << "Enter " << i + 1 << " student's name and surname: ";
-                    cin >> students[i].name >> students[i].sur;
-                }
+    // Ask the user for the number of homework
+    cout << "How much homework? ";
+    while (!(cin >> hw) || hw <= 0) {
+        cout << "Error: Please enter a valid number greater than 0." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
-                // Generate random grades
-                generateRandomGrades(students, hw);
+    // Resize the students vector to accommodate 's' number of students
+    students.resize(s);
 
-                char displayChoice;
-                cout << "Do you want to see the final average (A) or the median (M)? ";
-                cin >> displayChoice;
+    // Enter names and surnames manually for each student
+    for (int i = 0; i < s; ++i) {
+        cout << "Enter " << i + 1 << " student's name and surname: ";
+        cin >> students[i].name >> students[i].sur;
+        
+    }
+generateRandomGrades(students, hw);
+  
 
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
-                if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << "Final Average";
-                else if (displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << "Median";
-                cout << endl;
+    // Ask the user whether to display the final average or median
+    char displayChoice;
+    cout << "Do you want to see the final average (A) or the median (M)? ";
+    cin >> displayChoice;
 
-                cout << "------------------------------------------------------------" << endl;
-                for (int i = 0; i < students.size(); i++) {
-                    cout << left << setw(20) << students[i].name << setw(20) << students[i].sur;
-                    if (displayChoice == 'A' || displayChoice == 'a')
-                        cout << setw(20) << fixed << setprecision(2) << students[i].final_avg;
-                    else if (displayChoice == 'M' || displayChoice == 'm')
-                        cout << setw(20) << fixed << setprecision(2) << students[i].median;
-                    cout << endl;
-                }
-                break;
-            }
+    // Display the selected information
+    cout << left << setw(20) << "Name" << setw(20) << "Surname";
+    if (displayChoice == 'A' || displayChoice == 'a')
+        cout << setw(20) << "Final Average";
+    else if (displayChoice == 'M' || displayChoice == 'm')
+        cout << setw(20) << "Median";
+    cout << endl;
+
+    cout << "------------------------------------------------------------" << endl;
+    for (int i = 0; i < students.size(); i++) {
+        cout << left << setw(20) << students[i].name << setw(20) << students[i].sur;
+        if (displayChoice == 'A' || displayChoice == 'a')
+            cout << setw(20) << fixed << setprecision(2) << students[i].final_avg;
+        else if (displayChoice == 'M' || displayChoice == 'm')
+            cout << setw(20) << fixed << setprecision(2) << students[i].median;
+        cout << endl;
+    }
+    break;
+}
+
+
+
             case '3': {
                 cout << "How many students in a group?";
                  while (!(cin >> s)) {
