@@ -247,7 +247,7 @@ int main() {
                 break;
             }
             case '5':{
-                ofstream out_file ("results.txt");
+                ofstream out_file ("rezultatai.txt");
                 if (!out_file){
                     cout << "Klaida. Nepavyko atidaryti failo." << endl;
                 }
@@ -268,6 +268,36 @@ int main() {
                     cin.clear();
                     cin.ignore();
                 }
+                char sortChoice;
+                cout << "Rusiuoti pagal (V) Varda, (P) Pavarde, (M) Mediana arba (A) Vidurki: ";
+                cin >> sortChoice;
+                while (sortChoice != 'V' && sortChoice != 'v' && sortChoice != 'P' && sortChoice != 'p' && sortChoice != 'M' && sortChoice != 'm' && sortChoice != 'A' && sortChoice != 'a'){
+                cout << "Klaida. Prasome ivesti V jei norite rusiuoti pagal varda, P, jei pagal pavarde, M,  jei pagal mediana arba A, jei pagal vidurki " << endl;
+                cin.clear();
+                cin.ignore();
+                cin >> sortChoice;
+                 }
+    switch (sortChoice){
+        case 'V':
+        case 'v':
+            sort(students.begin(), students.end(), compareByName);
+            break;
+        case 'P':
+        case 'p':
+            sort (students.begin(), students.end(), compareBySurname);
+            break;
+        case 'M':
+        case 'm':
+            sort (students.begin(), students.end(), compareByMedian);
+            break;
+        case 'A':
+        case 'a':
+            sort (students.begin(), students.end(), compareByAvg);
+            break;
+        default:
+            cout << "Klaida. Duomenys bus rodomi neisrusiuoti." << endl;
+            break;
+    }
 
                 out_file << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
