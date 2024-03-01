@@ -17,28 +17,33 @@ int main() {
         cout << "5. Nuskaityti duomenis is failo ir duomenis isvesti atskirame faile" << endl;
         cout << "6. Uzbaigti programa" << endl;
         cout << "Jusu pasirinkimas: ";
-        cin >> choice;
+        while (!(cin >> choice)){
+            cout<< "Klaida. Prasome ivesti skaiciu, atitinkanti meniu opcijas"<< endl;
+            cin.clear();
+            cin.ignore();
+        }
+        
 
              switch (choice) {
          case '1': {
                  cout << "Kiek studentu grupeje? ";
-                 while (!(cin >> s)) {
+                 while (!(cin >> s)|| s< 0) {
                 cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore();
     }
                 students.resize(s);
 
                  cout << "Kiek namu darbu? ";
-                 while (!(cin >> hw)) {
+                 while (!(cin >> hw)|| hw < 0) {
                 cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore();
     
                  }
 
                     enterDataManually(students, hw);
-                    cout << "Duomys ranka ivesti sekmingai." << endl;
+                    cout << "Duomenys ranka ivesti sekmingai." << endl;
 
                     char displayChoice;
                     cout << "Norite matyt vidurki (A) ar mediana (M)? ";
@@ -78,7 +83,7 @@ int main() {
             while (!(cin >> s) || s <= 0) {
             cout << "Klaida. Iveskite skaiciu didesni uz 0." << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore();
             }
 
     
@@ -86,7 +91,7 @@ int main() {
             while (!(cin >> hw) || hw <= 0) {
             cout << "Klaida. Iveskite skaiciu didesni uz 0." << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore();
             }
 
             // cia kad tilptu kazkiek studentu
@@ -133,7 +138,7 @@ int main() {
                  while (!(cin >> s)) {
                  cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                  cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore();
         
                 }
               students.resize(s);
@@ -142,7 +147,7 @@ int main() {
             while (!(cin >> hw)) {
             cout << "Klaida. Iveskite tinkama skaiciu." << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore();
         
                }
 
@@ -176,13 +181,49 @@ int main() {
             case '4': {
                 int N;
                 cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
-                cin >> N;
+                while (!(cin >> N) || N <= 0){
+                    cout << "Klaida. Iveskite skaiciu didesni uz 0"<< endl;
+                    cin.clear();
+                    cin.ignore();
+                }
 
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
                 cout << " Norite matyt vidurki (A) ar mediana (M)? ";
+                 cin >> displayChoice;
+                while (displayChoice != 'A' && displayChoice != 'a' && displayChoice != 'M' && displayChoice != 'm') {
+                 cout << "Klaida. Iveskite 'A' arba 'M': ";
                 cin >> displayChoice;
+    }
+                char sortChoice;
+                cout << "Rusiuoti pagal (V) Varda, (P) Pavarde, (M) Mediana arba (A) Vidurki: ";
+                cin >> sortChoice;
+                while (sortChoice != 'V' && sortChoice != 'v' && sortChoice != 'P' && sortChoice != 'p' && sortChoice != 'M' && sortChoice != 'm' && sortChoice != 'A' && sortChoice != 'a'){
+                cout << "Klaida. Prasome ivesti V jei norite rusiuoti pagal varda, P, jei pagal pavarde, M,  jei pagal mediana arba A, jei pagal vidurki " << endl;
+                cin >> sortChoice;
+   }
+    switch (sortChoice){
+        case 'V':
+        case 'v':
+            sort(students.begin(), students.end(), compareByName);
+            break;
+        case 'P':
+        case 'p':
+            sort (students.begin(), students.end(), compareBySurname);
+            break;
+        case 'M':
+        case 'm':
+            sort (students.begin(), students.end(), compareByMedian);
+            break;
+        case 'A':
+        case 'a':
+            sort (students.begin(), students.end(), compareByAvg);
+            break;
+        default:
+            cout << "Klaida. Duomenys bus rodomi neisrusiuoti." << endl;
+            break;
+    }
 
                 cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
@@ -209,13 +250,21 @@ int main() {
                 }
                 int N;
                 cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
-                cin >> N;
+                while (!(cin >> N) || N <= 0){
+                    cout << "Klaida. Iveskite skaiciu didesni uz 0"<< endl;
+                    cin.clear();
+                    cin.ignore();
+                }
 
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
                 cout << "Norite matyt vidurki (A) ar mediana (M)? ";
-                cin >> displayChoice;
+                 while (!(cin  >> displayChoice || displayChoice != 'A' && displayChoice != 'a' && displayChoice != 'M' && displayChoice != 'm')){
+                    cout << "Klaida. Prasome ivesti A jei norite, kad rodytu vidurki arba M, jei norite, kad rodytu mediana"<< endl;
+                    cin.clear();
+                    cin.ignore();
+                }
 
                 out_file << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
