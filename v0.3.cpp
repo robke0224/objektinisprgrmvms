@@ -372,20 +372,56 @@ generateRandomGrades(students, hw);
             }
             case '4': {
                 int N;
-                cout << "Enter how many data entries you want to read: ";
-                cin >> N;
+                cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
+                while (!(cin >> N) || N <= 0){
+                    cout << "Klaida. Iveskite skaiciu didesni uz 0"<< endl;
+                    cin.clear();
+                    cin.ignore();
+                }
 
                 readDataFromFile(students, hw, N);
 
                 char displayChoice;
-                cout << "Do you want to see the final average (A) or the median (M)? ";
+                cout << " Norite matyt vidurki (A) ar mediana (M)? ";
+                 cin >> displayChoice;
+                while (displayChoice != 'A' && displayChoice != 'a' && displayChoice != 'M' && displayChoice != 'm') {
+                 cout << "Klaida. Iveskite 'A' arba 'M': ";
                 cin >> displayChoice;
+    }
+                char sortChoice;
+                cout << "Rusiuoti pagal (V) Varda, (P) Pavarde, (M) Mediana arba (A) Vidurki: ";
+                cin >> sortChoice;
+                while (sortChoice != 'V' && sortChoice != 'v' && sortChoice != 'P' && sortChoice != 'p' && sortChoice != 'M' && sortChoice != 'm' && sortChoice != 'A' && sortChoice != 'a'){
+                cout << "Klaida. Prasome ivesti V jei norite rusiuoti pagal varda, P, jei pagal pavarde, M,  jei pagal mediana arba A, jei pagal vidurki " << endl;
+                cin >> sortChoice;
+   }
+    switch (sortChoice){
+        case 'V':
+        case 'v':
+            sort(students.begin(), students.end(), compareByName);
+            break;
+        case 'P':
+        case 'p':
+            sort (students.begin(), students.end(), compareBySurname);
+            break;
+        case 'M':
+        case 'm':
+            sort (students.begin(), students.end(), compareByMedian);
+            break;
+        case 'A':
+        case 'a':
+            sort (students.begin(), students.end(), compareByAvg);
+            break;
+        default:
+            cout << "Klaida. Duomenys bus rodomi neisrusiuoti." << endl;
+            break;
+    }
 
-                cout << left << setw(20) << "Name" << setw(20) << "Surname";
+                cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde";
                 if (displayChoice == 'A' || displayChoice == 'a')
-                    cout << setw(20) << "Final Average";
+                    cout << setw(20) << "Vidurkis";
                 else if (displayChoice == 'M' || displayChoice == 'm')
-                    cout << setw(20) << "Median";
+                    cout << setw(20) << "Mediana";
                 cout << endl;
 
                 cout << "------------------------------------------------------------" << endl;
