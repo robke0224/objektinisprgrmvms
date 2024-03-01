@@ -94,7 +94,6 @@ void readDataFromFile(vector<Student>& students, double& hw, int N) {
         cerr << e.what() << endl;
     }
 }
-
 void enterDataManually(vector<Student>& students, double hw) {
     try {
         for (int i = 0; i < students.size(); ++i) {
@@ -105,24 +104,55 @@ void enterDataManually(vector<Student>& students, double hw) {
             double total_grades = 0.0;
 
             for (int j = 0; j < hw; ++j) {
-                cout << "Iveskite mokinio pazymius uz " << j + 1 << " namu darbus: ";
-                while (!(cin >> students[i].grades[j])|| students[i].grades[j] < 1 || students[i].grades[j] > 10){
+                cout << "Iveskite mokinio pazymi uz " << j + 1 << " namu darbus: ";
+
+                while (true) {
                     if (!(cin >> students[i].grades[j])) {
                         cout << "Klaida. Iveskite skaiciu." << endl;
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    }else if (students[i].grades[j] < 1 || students[i].grades[j] > 10) {
-                        cout << "Klaida. Skaicius privalo buti intervale nuo 1 iki 10." << endl;
-                        cin.clear();
-                        cin.ignore();
+                    } else if (students[i].grades[j] < 1 || students[i].grades[j] > 10) {
+                        cout << "Klaida. Skaicius privalo priklausyti intervalui nuo 1 iki 10." << endl;
+                    } else {
+                        break;  // iseina is loopo jeigu neteisingas inputas
                     }
-                } ;
+                }
+
                 total_grades += students[i].grades[j];
             }
+
+            do {
+                cout << "Iveskite " << i + 1 << " mokinio egzamino rezultata: ";
+                if (!(cin >> students[i].exam_results)) {
+                    cout << "Klaida. Iveskite skaiciu." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                } else if (students[i].exam_results < 1 || students[i].exam_results > 10) {
+                    cout << "Klaida. Skaicius privalo priklausyti intervalui nuo 1 iki 10." << endl;
+                }
+            } while (cin.fail() || students[i].exam_results < 1 || students[i].exam_results > 10);
+
+            students[i].final_avg = 0.4 * (total_grades / hw) + 0.6 * students[i].exam_results; //vidurkis
         }
     } catch (const exception& e) {
         cerr << e.what() << endl;
     }
+}
+
+bool compareByName(const Student& a, const Student& b) {
+    return stoi(a.name.substr(6,1)) < stoi(b.name.substr(6,1));
+}
+
+bool compareBySurname(const Student& a, const Student& b) {
+    return stoi(a.sur.substr(7,1)) < stoi(b.sur.substr(7,1));
+}
+
+bool compareByMedian(const Student& a, const Student& b) {
+    return a.median < b.median;
+}
+
+bool compareByAvg(const Student& a, const Student& b) {
+    return a.final_avg < b.final_avg;
 }
 
 
