@@ -26,6 +26,9 @@ void generateRandomData(vector<Student>& students, double hw);
 double calculateMedian(vector<int>& arr);
 void readDataFromFile(vector<Student>& students, double& hw, int N);
 void enterDataManually(vector<Student>& students, double hw);
-
+bool compareByName(const Student& a, const Student& b);
+bool compareBySurname(const Student& a, const Student& b);
+bool compareByMedian(const Student& a, const Student& b);
+bool compareByAvg(const Student& a, const Student& b);
 
 #endif 
