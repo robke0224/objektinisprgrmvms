@@ -319,55 +319,91 @@ int main() {
                 break;
 
             }
-         case '6': { // Moved switch statement inside case '6'
-                // Choices for the amount of data
-                string choices[] = {"1 000", "10 000", "100 000", "1 000 000", "10 000 000"};
+         case '6': {
+ srand(time(0));
 
-                // Display the menu
-                cout << "pasirinkite kiek duomenu norite sugeneruoti:" << endl;
-                for (int i = 0; i < 5; ++i) {
-                    cout << i + 1 << ". " << choices[i] << endl;
-                }
+    // Pasirinkimo meniu failų pasirinkimui
+    cout << "Pasirinkite, kurį failą norite sugeneruoti:" << endl;
+    cout << "1. kietiakai" << endl;
+    cout << "2. slabakai" << endl;
 
-                // Get user input
-                int pasirinkimas;
-                cout << "jusu pasirinkimas (1-5): ";
-                cin >> pasirinkimas;
+    int fileChoice;
+    cout << "Jūsų pasirinkimas (1 arba 2): ";
+    cin >> fileChoice;
 
-                // Validate the user input
-                if (pasirinkimas < 1 || pasirinkimas > 5) {
-                    cout << "klaidingas pasirinkimas. iveskite skaiciu nuo 1 iki 5." << endl;
-                    return 1;
-                }
+    if (fileChoice != 1 && fileChoice != 2) {
+        cout << "Klaidingas pasirinkimas. Pasirinkite 1 arba 2." << endl;
+        return 1;
+    }
 
-                // Convert the choice to the corresponding amount
-                int kiekis;
-                switch (pasirinkimas) {
-                    case 1: kiekis = 1000; break;
-                    case 2: kiekis = 10000; break;
-                    case 3: kiekis = 100000; break;
-                    case 4: kiekis = 1000000; break;
-                    case 5: kiekis = 10000000; break;
-                }
+    string choices[] = {"1 000", "10 000", "100 000", "1 000 000", "10 000 000"};
 
-                // Save the generated data to a new text file
-                ofstream outFile("generuotiDuomenys.txt");
-                if (outFile.is_open()) {
-                    for (int i = 1; i <= kiekis; ++i) {
-                        outFile << "vardas " << i << " pavarde " << i;
-                        for (int j = 0; j < 10; ++j) {
-                            outFile << " " << generateRandomNumber(1,10);
-                        }
-                        outFile << endl;
-                    }
-                    outFile.close();
-                    cout << "duomenys faile 'generuotiDuomenys.txt' issaugoti sekmingai." << endl;
-                } else {
-                    cout << "klaida. nepavyko atidaryti failo irasymui." << endl;
-                    return 1;
-                }
-                break;
+    cout << "Pasirinkite kiek duomenų norite sugeneruoti:" << endl;
+    for (int i = 0; i < 5; ++i) {
+        cout << i + 1 << ". " << choices[i] << endl;
+    }
+
+    int choice;
+    cout << "Jūsų pasirinkimas (1-5): ";
+    cin >> choice;
+
+    if (choice < 1 || choice > 5) {
+        cout << "Klaidingas pasirinkimas. Iveskite skaiciu nuo 1 iki 5." << endl;
+        return 1;
+    }
+
+    int kiekis;
+    switch (choice) {
+        case 1: kiekis = 1000; break;
+        case 2: kiekis = 10000; break;
+        case 3: kiekis = 100000; break;
+        case 4: kiekis = 1000000; break;
+        case 5: kiekis = 10000000; break;
+    }
+
+    // Atidaryti failus rašymui pagal vartotojo pasirinkimą
+    string fileName;
+    if (fileChoice == 1) {
+        fileName = "kietiakai.txt";
+    } else {
+        fileName = "slabakai.txt";
+    }
+
+    // Atidaryti failą rašymui pagal vartotojo pasirinkimą
+    ofstream outFile(fileName);
+
+    if (!outFile.is_open()) {
+        cout << "Klaida atidarant failą irasymui." << endl;
+        return 1;
+    }
+
+    // Generuoti ir rašyti duomenis į failą
+    for (int i = 1; i <= 100; ++i) {
+        int pazymiai[10];
+        for (int j = 0; j < 10; ++j) {
+            pazymiai[j] = generateRandomNumber(1, 10);
+        }
+        double vidurkis = calculateAverage(pazymiai, 10);
+
+        // Rašyti duomenis į failą pagal vidurkį
+        if ((fileChoice == 1 && vidurkis >= 5.0) || (fileChoice == 2 && vidurkis < 5.0)) {
+            outFile << "vardas " << i << " pavarde " << i << " Vidurkis: " << vidurkis;
+            for (int j = 0; j < 10; ++j) {
+                outFile << " " << pazymiai[j];
             }
+            outFile << endl;
+        }
+    }
+
+    // Uždaryti failą
+    outFile.close();
+
+    cout << "Duomenys išsaugoti sekmingai į failą \"" << fileName << "\"." << endl;
+
+    return 0;
+}
+break;
+
 
             case '7': {
                 cout << "Programa baigta." << endl;
