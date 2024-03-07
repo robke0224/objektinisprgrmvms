@@ -160,3 +160,10 @@ int generateRandomNumber(int min, int max) {
     uniform_int_distribution<int> distribution(min, max);
     return distribution(rng);
 }
+double calculateAverage(int arr[], int size) {
+    double sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += arr[i];
+    }
+    return sum / size;
+}
