@@ -32,4 +32,6 @@ bool compareBySurname(const Student& a, const Student& b);
 bool compareByMedian(const Student& a, const Student& b);
 bool compareByAvg(const Student& a, const Student& b);
 int generateRandomNumber(int min, int max);
+double calculateAverage(int arr[], int size);
+
 #endif 
