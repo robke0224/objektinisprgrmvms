@@ -160,10 +160,12 @@ int generateRandomNumber(int min, int max) {
     uniform_int_distribution<int> distribution(min, max);
     return distribution(rng);
 }
-double calculateAverage(int arr[], int size) {
+double calculateAverage(const vector<int>& pazymiai) {
     double sum = 0;
-    for (int i = 0; i < size; ++i) {
-        sum += arr[i];
+    for (size_t j = 0; j < pazymiai.size(); ++j) {
+        sum += pazymiai[j];
     }
-    return sum / size;
+    return sum / pazymiai.size();
 }
+
+
