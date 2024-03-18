@@ -398,7 +398,7 @@ int main() {
         return 1;
     }
     //generuoja ir raso duom i faila
-    for (int i = 1; i <= 100; ++i) {
+    for (int i = 1; i <= kiekis; ++i) {
         vector<int> grades;
         for (int j = 0; j < 10; ++j) {
             grades.push_back(generateRandomNumber(1, 10));
