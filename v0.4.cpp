@@ -2,13 +2,15 @@
 #include "student.h"
 
 int main() {
+    chrono::time_point<chrono::high_resolution_clock> start_file = chrono::high_resolution_clock::now(); // pradzia laikko matavimo 
     int s;
     double hw;
 
     char choice;
     vector<Student> students;
-
+   
     do {
+        chrono::time_point<chrono::high_resolution_clock> start_menu = chrono::high_resolution_clock::now();
         cout << "Meniu:" << endl;
         cout << "1. Ivesti duomenis ranka" << endl;
         cout << "2. Ivesti vardus ir pavardes ranka, o pazymius generuoti atsitiktinai" << endl;
@@ -23,7 +25,9 @@ int main() {
             cin.clear();
             cin.ignore();
         }
-        
+        chrono::time_point<chrono::high_resolution_clock> end_menu = chrono::high_resolution_clock::now(); // Time after menu selection
+        chrono::duration<double, std::milli> duration_menu = end_menu - start_menu;
+        cout << "uztruko laiko: " << duration_menu.count() << " ms" << endl;
 
              switch (choice) {
          case '1': {
@@ -179,6 +183,7 @@ int main() {
                 break;
             }
             case '4': {
+               chrono::high_resolution_clock::time_point start_files = chrono::high_resolution_clock::now(); //laikas
                 int N;
                 cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
                 while (!(cin >> N) || N <= 0){
@@ -245,9 +250,13 @@ int main() {
                         cout << setw(20) << fixed << setprecision(2) << students[i].median;
                     cout << endl;
                 }
+                chrono::high_resolution_clock::time_point end_files = chrono::high_resolution_clock::now(); // Time after file operation
+                chrono::duration<double, milli> duration_files = end_files - start_files;
+                cout << "darbas su failais uztruko: " << duration_files.count() << " ms" << endl;
                 break;
             }
             case '5':{
+                chrono::time_point<chrono::high_resolution_clock> start_filees = chrono::high_resolution_clock::now();//pradzia
                 ofstream out_file ("rezultatai.txt");
                 if (!out_file){
                     cout << "Klaida. Nepavyko atidaryti failo." << endl;
@@ -316,12 +325,17 @@ int main() {
                         out_file << setw(20) << fixed << setprecision(2) << students[i].median;
                     out_file << endl;
                 }
+                chrono::time_point<chrono::high_resolution_clock> end_filees = chrono::high_resolution_clock::now(); // Time after file operation
+                chrono::duration<double, milli> duration_filees = end_filees - start_filees;
+                cout << "darbas su failais uztruko: " << duration_filees.count() << " ms" << endl;
                 break;
 
             }
          case '6': {
-srand(time(0));
-// pasirinkimo meniu
+    chrono::time_point<chrono::high_resolution_clock> start_failas = chrono::high_resolution_clock::now(); //pradeda
+
+    srand(time(0));
+    // pasirinkimo meniu
     cout << "Pasirinkite, kurį failą norite sugeneruoti:" << endl;
     cout << "1. kietiakai" << endl;
     cout << "2. slabakai" << endl;
@@ -329,7 +343,7 @@ srand(time(0));
     int fileChoice;
     cout << "Jūsų pasirinkimas (1 arba 2): ";
     cin >> fileChoice;
-// tikrinam
+    // tikrinam
     if (fileChoice != 1 && fileChoice != 2) {
         cout << "Klaidingas pasirinkimas. Pasirinkite 1 arba 2." << endl;
         return 1;
@@ -376,21 +390,21 @@ srand(time(0));
     } else {
         fileName = "slabakai.txt";
     }
-// atsidaro faila pagal vartotojo pasirinkima
+    // atsidaro faila pagal vartotojo pasirinkima
     ofstream outFile(fileName);
 
     if (!outFile.is_open()) {
         cout << "Klaida atidarant failą irasymui." << endl;
         return 1;
     }
-//generuoja ir raso duom i faila
+    //generuoja ir raso duom i faila
     for (int i = 1; i <= 100; ++i) {
         vector<int> grades;
         for (int j = 0; j < 10; ++j) {
             grades.push_back(generateRandomNumber(1, 10));
         }
         double average = calculateAverage(grades);
-// raso duomenis i faila pagal vidurki
+        // raso duomenis i faila pagal vidurki
         if ((fileChoice == 1 && average >= 5.0) || (fileChoice == 2 && average < 5.0)) {
             outFile << "vardas " << i << " pavarde " << i << " Vidurkis: " << average;
             for (int j = 0; j < 10; ++j) {
@@ -399,15 +413,20 @@ srand(time(0));
             outFile << endl;
         }
     }
-//uzdaro faila
+    //uzdaro faila
     outFile.close();
 
     cout << "Duomenys išsaugoti sekmingai į failą \"" << fileName << "\"." << endl;
 
-    return 0;
-}
-break;
 
+
+    chrono::time_point<chrono::high_resolution_clock> end_failas = chrono::high_resolution_clock::now(); // Time after file operation
+    chrono::duration<double, milli> duration_failas = end_failas - start_failas;
+    cout << "irasymas uztruko: " << duration_failas.count() << " ms" << endl;
+
+        break;
+         }
+             
             case '7': {
                 cout << "Programa baigta." << endl;
                 break;
@@ -420,9 +439,14 @@ break;
      
 
     
-
     }
+    
     while (choice != '7');
-return 0;
-}
+    ;
+    
+       chrono::time_point<chrono::high_resolution_clock> end_file = chrono::high_resolution_clock::now(); // End measuring time
+    chrono::duration<double, milli> duration = end_file - start_file;
+    cout << "visas programos vykdymo laikas: " << duration.count() << " milliseconds" << endl;
 
+    return 0;
+    }
