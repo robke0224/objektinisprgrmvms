@@ -13,3 +13,7 @@ pateikiu keleta laiko skaiciavimo pavyzdziu, eiles tvarka, generuojant atitinkam
 <img width="330" alt="Screenshot 2024-03-18 at 21 17 58" src="https://github.com/robke0224/objektinis_programavimas/assets/154459735/f46c97cc-6db5-4c79-8476-2ad1838cebb6">
 <img width="330" alt="Screenshot 2024-03-18 at 21 18 27" src="https://github.com/robke0224/objektinis_programavimas/assets/154459735/2b8f2e7f-35aa-4860-b3e6-1e236f2ddae3">
 <img width="330" alt="Screenshot 2024-03-18 at 21 20 13" src="https://github.com/robke0224/objektinis_programavimas/assets/154459735/d7ef7e1b-8028-4cdf-bb74-5c7ea90c2b24">
+
+
+pateikiu lentele, kurioje pateikti gauti duomenys, failu generavima atlikus 3 kartus:
+<img width="528" alt="image" src="https://github.com/robke0224/objektinis_programavimas/assets/154459735/da00a578-1e2e-454d-8825-8200103ada6b">
