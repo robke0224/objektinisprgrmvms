@@ -1,0 +1,4 @@
+list:
+ g++ -c mainlist.cpp pagalbineslist.cpp
+programa:
+g++ -o List mainlist.o pagalbineslist.o
