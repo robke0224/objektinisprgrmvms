@@ -1,0 +1,4 @@
+vektoriai:
+ g++ -c mainvector.cpp pagalbinesvector.cpp
+programa:
+g++ -o Vektoriai mainvector.o pagalbinesvector.o
