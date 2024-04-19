@@ -1,0 +1,4 @@
+deque:
+ g++ -c maindeque.cpp pagalbinesdeque.cpp
+programa:
+g++ -o Deque maindeque.o pagalbinesdeque.o
