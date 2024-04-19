@@ -110,7 +110,6 @@ void failuskaick(std::string wp, Pazymiai hi, vector<Pazymiai>& P, vector<Pazymi
     for(int l=0; l<lineCount-1; l++){
         auto nus = std::chrono::high_resolution_clock::now();
         double suma=0.0;
-        //hi.paz.clear();
         F>>xx>>yy;
         hi.setPav(xx);
         hi.setVar(yy);
@@ -118,13 +117,10 @@ void failuskaick(std::string wp, Pazymiai hi, vector<Pazymiai>& P, vector<Pazymi
         vector<int> nauji_pazymiai;
         for(int i=0; i<pv; i++){
             F>>z;
-            //hi.paz.push_back(z);
-            //hi.setOnePaz(z);
             nauji_pazymiai.push_back(z);
             suma=suma+z;
         }
         hi.setPazymiai(nauji_pazymiai);
-        //sort(hi.paz.begin(), hi.paz.end());
         hi.sortPaz(hi);
         hi.setVid(suma/pv);
 
@@ -150,10 +146,7 @@ void failuskaick(std::string wp, Pazymiai hi, vector<Pazymiai>& P, vector<Pazymi
     cout<< "P funkcija size: "<<P.size()<<endl;
     F.close();
 
-
     std::cout << "Nuskaitymo trukme: " << laikassum << " milisekundes." << std::endl;
-
-
     std::cout << "Skirtymo i naujus konteinerius trukme: " << suml << " milisekundes." << std::endl;
 
     int xyz;
@@ -227,19 +220,17 @@ void failuskaickstrategija1(string wp, Pazymiai hi,std::vector<Pazymiai>& S, std
     for(int l=0; l<lineCount-1; l++){
         auto nus = std::chrono::high_resolution_clock::now();
         double suma=0.0;
-        //hi.paz.clear();
         F>>xx>>yy;
         hi.setPav(xx);
         hi.setVar(yy);
 
+        vector<int> nauji_pazymiai;
         for(int i=0; i<pv; i++){
             F>>z;
-            //hi.paz.push_back(z);
-            hi.setOnePaz(z);
+            nauji_pazymiai.push_back(z);
             suma=suma+z;
         }
-
-        //sort(hi.paz.begin(), hi.paz.end());
+        hi.setPazymiai(nauji_pazymiai);
         hi.sortPaz(hi);
 
         hi.setVid(suma/pv);
@@ -262,12 +253,11 @@ void failuskaickstrategija1(string wp, Pazymiai hi,std::vector<Pazymiai>& S, std
         auto naujaslaikas = std::chrono::duration_cast<std::chrono::milliseconds>(naujasp - naujas).count();
         naujaslaikassum=naujaslaikassum+naujaslaikas;
     }
-cout<< "Z funkcija size: "<<Z.size()<<endl;
+    cout<< "Z funkcija size: "<<Z.size()<<endl;
     cout<< "P funkcija size: "<<P.size()<<endl;
     F.close();
 
     std::cout << "Nuskaitymo trukme: " << laikassum << " milisekundes." << std::endl;
-
     std::cout << "Skirtymo i naujus konteinerius trukme: " << naujaslaikassum << " milisekundes." << std::endl;
     int xyz;
     cout<<"Jeigu norite rusiuoti pagal galutini pazymi spauskite 1: "<<endl;
@@ -330,7 +320,6 @@ void failuskaickstrategija2(string wp, Pazymiai hi, std::vector<Pazymiai>& P, st
     string zodziai;
     int pv=0;
 
-
     while( zodziai != "Egz."){
         F>>zodziai;
         pv++;
@@ -341,19 +330,17 @@ void failuskaickstrategija2(string wp, Pazymiai hi, std::vector<Pazymiai>& P, st
     for(int l=0; l<lineCount-1; l++){
         auto nus = std::chrono::high_resolution_clock::now();
         double suma=0.0;
-        //hi.paz.clear();
         F>>xx>>yy;
         hi.setPav(xx);
         hi.setVar(yy);
 
+        vector<int> nauji_pazymiai;
         for(int i=0; i<pv; i++){
             F>>z;
-            //hi.paz.push_back(z);
-            hi.setOnePaz(z);
+            nauji_pazymiai.push_back(z);
             suma=suma+z;
         }
-
-        //sort(hi.paz.begin(), hi.paz.end());
+        hi.setPazymiai(nauji_pazymiai);
         hi.sortPaz(hi);
 
         hi.setVid(suma/pv);
@@ -371,7 +358,6 @@ void failuskaickstrategija2(string wp, Pazymiai hi, std::vector<Pazymiai>& P, st
         if(hi.getGalutinis()<5){
             Z.push_back(hi);
             P.pop_back();
-            //P.erase(P.begin()+l);
         }
         auto naujasp = std::chrono::high_resolution_clock::now();
         auto naujaslaikas = std::chrono::duration_cast<std::chrono::milliseconds>(naujasp - naujas).count();
@@ -423,7 +409,7 @@ void failuskaickstrategija2(string wp, Pazymiai hi, std::vector<Pazymiai>& P, st
 void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, std::vector<Pazymiai>& P, std::vector<Pazymiai>& Z){
 
     int z;
-    double laikass;
+    double laikass=0;
     string xx,yy;
     int egg;
     ifstream file(wp);
@@ -455,7 +441,6 @@ void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, st
     for(int l=0; l<lineCount-1; l++){
         auto nus = std::chrono::high_resolution_clock::now();
         double suma=0.0;
-        //hi.paz.clear();
         F>>xx>>yy;
         hi.setPav(xx);
         hi.setVar(yy);
@@ -463,13 +448,11 @@ void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, st
         vector<int> nauji_pazymiai;
         for(int i=0; i<pv; i++){
             F>>z;
-            //hi.setOnePaz(z);
             nauji_pazymiai.push_back(z);
             suma=suma+z;
         }
         hi.setPazymiai(nauji_pazymiai);
 
-        //sort(hi.paz.begin(), hi.paz.end());
         hi.sortPaz(hi);
 
         hi.setVid(suma/pv);
@@ -485,18 +468,13 @@ void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, st
         auto nusk = std::chrono::high_resolution_clock::now();
         auto laikas = std::chrono::duration_cast<std::chrono::milliseconds>(nusk - nus).count();
         laikass=laikass+laikas;
-
-
     }
-        F.close();
-        auto naujas = std::chrono::high_resolution_clock::now();
+    F.close();
+    auto naujas = std::chrono::high_resolution_clock::now();
 
-        auto partition_point = std::partition(S.begin(), S.end(), [](const Pazymiai& s) {
-        return s.getGalutinis() >= 5;
-    });
+    auto partition_point = std::partition(S.begin(), S.end(), [](const Pazymiai& s) { return s.getGalutinis() >= 5; });
 
     std::copy(S.begin(), partition_point, std::back_inserter(P));
-
     std::copy(partition_point, S.end(), std::back_inserter(Z));
     S.clear();
     auto naujasp = std::chrono::high_resolution_clock::now();
@@ -542,127 +520,7 @@ void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, st
 
 
 }
-/*
-void failuskaickstrategija3(string wp, Pazymiai hi, std::vector<Pazymiai>& S, std::vector<Pazymiai>& P, std::vector<Pazymiai>& Z){
 
-    int z;
-    double laikass;
-    string xx,yy;
-    int egg;
-    ifstream file(wp);
-
-    if (!file.is_open()) {
-        cout << "Failas  neegzistuoja!" << endl;
-    }
-    file.close();
-    int lineCount = 0;
-    string line;
-    file.open(wp);
-    while (getline(file, line)) {
-        lineCount++;
-    }
-    file.close();
-
-    ifstream F(wp);
-    string zodziai;
-    int pv=0;
-
-
-    while( zodziai != "Egz."){
-        F>>zodziai;
-        pv++;
-    }
-    S.clear();
-    pv=pv-3;
-    double suum=0;
-    for(int l=0; l<lineCount-1; l++){
-        auto nus = std::chrono::high_resolution_clock::now();
-        double suma=0.0;
-        //hi.paz.clear();
-        F>>xx>>yy;
-        hi.setPav(xx);
-        hi.setVar(yy);
-
-        for(int i=0; i<pv; i++){
-            F>>z;
-            //hi.paz.push_back(z);
-            hi.setOnePaz(z);
-            suma=suma+z;
-        }
-
-        //sort(hi.paz.begin(), hi.paz.end());
-        hi.sortPaz(hi);
-
-        hi.setVid(suma/pv);
-
-        F>>egg;
-        hi.setEgz(egg);
-
-        hi.setGalutinis((hi.getVid()*0.4)+(0.6*hi.getEgz()));
-
-        hi.setMed(mediana(pv,hi));
-        S.push_back(hi);
-
-        auto nusk = std::chrono::high_resolution_clock::now();
-        auto laikas = std::chrono::duration_cast<std::chrono::milliseconds>(nusk - nus).count();
-        laikass=laikass+laikas;
-
-
-    }
-        F.close();
-        auto naujas = std::chrono::high_resolution_clock::now();
-
-        auto partition_point = std::partition(S.begin(), S.end(), [](const Pazymiai& s) {
-        return s.getGalutinis() >= 5;
-    });
-
-    P.assign(S.begin(), partition_point);
-    Z.assign(partition_point, S.end());
-    S.clear();
-    auto naujasp = std::chrono::high_resolution_clock::now();
-    auto naujaslaikas = std::chrono::duration_cast<std::chrono::milliseconds>(naujasp - naujas).count();
-    cout<<" S size "<<S.size()<<endl;
-    cout<<" P size "<< P.size()<<endl;
-    cout<<" Z size "<< Z.size()<<endl;
-    std::cout << "Nuskaitymo trukme: " << laikass << " milisekundes." << std::endl;
-    std::cout << "Skirtymo i naujus konteinerius trukme: " << naujaslaikas << " milisekundes." << std::endl;
-
-    int xyz;
-    cout<<"Jeigu norite rusiuoti pagal galutini pazymi spauskite 1: "<<endl;
-                cout<<"Jeigu norite rusiuoti pagal mediana spauskite 2: "<<endl;
-                while (!(cin >> xyz)) {
-                    cout << "Klaida. Iveskite skaiciu nuo 1 arba 2: " ;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                }
-                auto pra = std::chrono::high_resolution_clock::now();
-                if(xyz==1){
-
-                    sort(P.begin(), P.end(), [](const Pazymiai &a, const Pazymiai &b) {
-                        return a.getGalutinis() < b.getGalutinis();
-                    });
-                    sort(Z.begin(), Z.end(), [](const Pazymiai &aa, const Pazymiai &bb) {
-                        return aa.getGalutinis() < bb.getGalutinis();
-
-                    });
-                }
-                if(xyz==2){
-
-                    sort(P.begin(), P.end(), [](const Pazymiai &a, const Pazymiai &b) {
-                        return a.getMed() < b.getMed();
-                    });
-                    sort(Z.begin(), Z.end(), [](const Pazymiai &aa, const Pazymiai &bb) {
-                        return aa.getMed() < bb.getMed();
-                    });
-                }auto pab = std::chrono::high_resolution_clock::now();
-
-                        float trukme = std::chrono::duration_cast<std::chrono::milliseconds>(pab - pra).count();
-                        suum=suum+trukme;
-                        std::cout << "Rusiavimo sort trukme: " << suum << " milisekundes." << std::endl;
-
-
-}
-*/
 void spausdintuvas(std::string zekai, std::string malaciai, vector<Pazymiai> P, vector<Pazymiai> Z ){
     auto p = std::chrono::high_resolution_clock::now();
     rezultataifailas(Z, zekai);
@@ -676,4 +534,179 @@ void spausdintuvas(std::string zekai, std::string malaciai, vector<Pazymiai> P, 
 
 }
 
+void testai() {
 
+    // konstruktoriu patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 6.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai C(var, pav, vid, egz, paz, galutinis, med);
+
+        assert(C.getPaz() == paz && "Konstruktoriaus testas nesekmingas: paz");
+        assert(C.getVar() == var && "Konstruktoriaus testas nesekmingas: var");
+        assert(C.getPav() == pav && "Konstruktoriaus testas nesekmingas: pav");
+        assert(C.getVid() == vid && "Konstruktoriaus testas nesekmingas: vid");
+        assert(C.getEgz() == egz && "Konstruktoriaus testas nesekmingas: egz");
+        assert(C.getGalutinis() == galutinis && "Konstruktoriaus testas nesekmingas: galutinis");
+        assert(C.getMed() == med && "Konstruktoriaus testas nesekmingas: med");
+    }
+
+
+    // copy konstruktoriaus patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 7.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai zmogus(var, pav, vid, egz, paz, galutinis, med);
+        Pazymiai copy(zmogus);
+
+        assert(copy.getPaz() == paz && "Copy Konstruktoriaus testas nesekmingas: paz");
+        assert(copy.getVar() == var && "Copy Konstruktoriaus testas nesekmingas: var");
+        assert(copy.getPav() == pav && "Copy Konstruktoriaus testas nesekmingas: pav");
+        assert(copy.getVid() == vid && "Copy Konstruktoriaus testas nesekmingas: vid");
+        assert(copy.getEgz() == egz && "Copy Konstruktoriaus testas nesekmingas: egz");
+        assert(copy.getGalutinis() == galutinis && "Copy Konstruktoriaus testas nesekmingas: galutinis");
+        assert(copy.getMed() == med && "Copy Konstruktoriaus testas nesekmingas: med");
+    }
+
+
+
+    // move konstruktoriaus patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 7.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai zmogus(var, pav, vid, egz, paz, galutinis, med);
+        Pazymiai copy(std::move(zmogus));
+
+        assert(copy.getPaz() == paz && "Move Konstruktoriaus testas nesekmingas: paz");
+        assert(copy.getVar() == var && "Move Konstruktoriaus testas nesekmingas: var");
+        assert(copy.getPav() == pav && "Move Konstruktoriaus testas nesekmingas: pav");
+        assert(copy.getVid() == vid && "Move Konstruktoriaus testas nesekmingas: vid");
+        assert(copy.getEgz() == egz && "Move Konstruktoriaus testas nesekmingas: egz");
+        assert(copy.getGalutinis() == galutinis && "Move Konstruktoriaus testas nesekmingas: galutinis");
+        assert(copy.getMed() == med && "Move Konstruktoriaus testas nesekmingas: med");
+    }
+
+
+
+
+    // destruktoriaus patikrinimas
+    {
+        Pazymiai C;
+
+        C.setOnePaz(10);
+        C.setOnePaz(9);
+        C.setOnePaz(8);
+
+        assert(!C.getPaz().empty() && "Destruktoriaus testas nesekmingas: paz");
+
+        Pazymiai naujas_C;
+        assert(naujas_C.getPaz().empty() && "Destruktoriaus testas nesekmingas: paz (naujas objektas)");
+    }
+
+
+    cout << "Testavimas sekmingas!" << endl;
+}
+/*
+void testai() {
+
+    // konstruktoriu patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 6.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai C(var, pav, vid, egz, paz, galutinis, med);
+
+        assert(C.getPaz() == paz && "Konstruktoriaus testas nesekmingas: paz");
+        assert(C.getVar() == var && "Konstruktoriaus testas nesekmingas: var");
+        assert(C.getPav() == pav && "Konstruktoriaus testas nesekmingas: pav");
+        assert(C.getVid() == vid && "Konstruktoriaus testas nesekmingas: vid");
+        assert(C.getEgz() == egz && "Konstruktoriaus testas nesekmingas: egz");
+        assert(C.getGalutinis() == galutinis && "Konstruktoriaus testas nesekmingas: galutinis");
+        assert(C.getMed() == med && "Konstruktoriaus testas nesekmingas: med");
+    }
+
+    // copy konstruktoriaus patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 7.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai zmogus(var, pav, vid, egz, paz, galutinis, med);
+        Pazymiai copy(zmogus);
+
+        assert(copy.getPaz() == paz && "Copy Konstruktoriaus testas nesekmingas: paz");
+        assert(copy.getVar() == var && "Copy Konstruktoriaus testas nesekmingas: var");
+        assert(copy.getPav() == pav && "Copy Konstruktoriaus testas nesekmingas: pav");
+        assert(copy.getVid() == vid && "Copy Konstruktoriaus testas nesekmingas: vid");
+        assert(copy.getEgz() == egz && "Copy Konstruktoriaus testas nesekmingas: egz");
+        assert(copy.getGalutinis() == galutinis && "Copy Konstruktoriaus testas nesekmingas: galutinis");
+        assert(copy.getMed() == med && "Copy Konstruktoriaus testas nesekmingas: med");
+    }
+
+    // move konstruktoriaus patikrinimas
+    {
+        string var = "Petras";
+        string pav = "PetrasPetras";
+        double vid = 7.4;
+        int egz = 7;
+        vector<int> paz = {10, 9, 8};
+        double galutinis = 9.0;
+        double med = 9.5;
+
+        Pazymiai zmogus(var, pav, vid, egz, paz, galutinis, med);
+        Pazymiai copy(std::move(zmogus));
+
+        assert(copy.getPaz() == paz && "Move Konstruktoriaus testas nesekmingas: paz");
+        assert(copy.getVar() == var && "Move Konstruktoriaus testas nesekmingas: var");
+        assert(copy.getPav() == pav && "Move Konstruktoriaus testas nesekmingas: pav");
+        assert(copy.getVid() == vid && "Move Konstruktoriaus testas nesekmingas: vid");
+        assert(copy.getEgz() == egz && "Move Konstruktoriaus testas nesekmingas: egz");
+        assert(copy.getGalutinis() == galutinis && "Move Konstruktoriaus testas nesekmingas: galutinis");
+        assert(copy.getMed() == med && "Move Konstruktoriaus testas nesekmingas: med");
+    }
+
+    // destruktoriaus patikrinimas
+    {
+        Pazymiai C;
+
+        C.setOnePaz(10);
+        C.setOnePaz(9);
+        C.setOnePaz(8);
+
+        assert(!C.getPaz().empty() && "Destruktoriaus testas nesekmingas: paz");
+
+        Pazymiai naujas_C;
+        assert(naujas_C.getPaz().empty() && "Destruktoriaus testas nesekmingas: paz (naujas objektas)");
+    }
+
+
+    cout << "Testavimas sekmingas!" << endl;
+}
+*/
