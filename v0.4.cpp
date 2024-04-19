@@ -1,43 +1,39 @@
 
 #include "student.h"
 
-int main() {
-    chrono::time_point<chrono::high_resolution_clock> start_file = chrono::high_resolution_clock::now(); // pradzia laikko matavimo 
-    int s;
+  int main() {
+    int studentukiekis;
     double hw;
 
     char choice;
     vector<Student> students;
-   
+
     do {
-        chrono::time_point<chrono::high_resolution_clock> start_menu = chrono::high_resolution_clock::now();
         cout << "Meniu:" << endl;
         cout << "1. Ivesti duomenis ranka" << endl;
         cout << "2. Ivesti vardus ir pavardes ranka, o pazymius generuoti atsitiktinai" << endl;
         cout << "3. Atsitiktinai generuoti viska" << endl;
         cout << "4. Nuskaityti duomenis is failo ir duomenis isvesti terminale" << endl;
         cout << "5. Nuskaityti duomenis is failo ir duomenis isvesti atskirame faile" << endl;
-        cout << "6. Pasirinkite kiek duomenu norite sugeneruoti i faila" << endl;
-        cout << "7. Uzbaigti programa" << endl;
+        cout << "6. Iveskite kieki studentu, kuri norite sugeneruoti " << endl;
+        cout << "7. Baigti programa" << endl;
         cout << "Jusu pasirinkimas: ";
         while (!(cin >> choice)){
             cout<< "Klaida. Prasome ivesti skaiciu, atitinkanti meniu opcijas"<< endl;
             cin.clear();
             cin.ignore();
         }
-        chrono::time_point<chrono::high_resolution_clock> end_menu = chrono::high_resolution_clock::now(); // Time after menu selection
-        chrono::duration<double, std::milli> duration_menu = end_menu - start_menu;
-        cout << "uztruko laiko: " << duration_menu.count() << " ms" << endl;
+        
 
              switch (choice) {
          case '1': {
                  cout << "Kiek studentu grupeje? ";
-                 while (!(cin >> s)|| s< 0) {
+                 while (!(cin >> studentukiekis)|| studentukiekis< 0) {
                 cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                 cin.clear();
                 cin.ignore();
     }
-                students.resize(s);
+                students.resize(studentukiekis);
 
                  cout << "Kiek namu darbu? ";
                  while (!(cin >> hw)|| hw < 0) {
@@ -139,13 +135,13 @@ int main() {
 
             case '3': {
                 cout << "Kiek studentu grupeje?";
-                 while (!(cin >> s)) {
+                 while (!(cin >> studentukiekis)) {
                  cout << "Klaida. Iveskite tinkama skaiciu." << endl;
                  cin.clear();
                 cin.ignore();
         
                 }
-              students.resize(s);
+              students.resize(studentukiekis);
 
             cout << "Kiek namu darbu? ";
             while (!(cin >> hw)) {
@@ -183,7 +179,6 @@ int main() {
                 break;
             }
             case '4': {
-               chrono::high_resolution_clock::time_point start_files = chrono::high_resolution_clock::now(); //laikas
                 int N;
                 cout << "Iveskite kieki studentu duomenu, kuri norite nuskaityti: ";
                 while (!(cin >> N) || N <= 0){
@@ -250,13 +245,9 @@ int main() {
                         cout << setw(20) << fixed << setprecision(2) << students[i].median;
                     cout << endl;
                 }
-                chrono::high_resolution_clock::time_point end_files = chrono::high_resolution_clock::now(); // Time after file operation
-                chrono::duration<double, milli> duration_files = end_files - start_files;
-                cout << "darbas su failais uztruko: " << duration_files.count() << " ms" << endl;
                 break;
             }
             case '5':{
-                chrono::time_point<chrono::high_resolution_clock> start_filees = chrono::high_resolution_clock::now();//pradzia
                 ofstream out_file ("rezultatai.txt");
                 if (!out_file){
                     cout << "Klaida. Nepavyko atidaryti failo." << endl;
@@ -325,128 +316,73 @@ int main() {
                         out_file << setw(20) << fixed << setprecision(2) << students[i].median;
                     out_file << endl;
                 }
-                chrono::time_point<chrono::high_resolution_clock> end_filees = chrono::high_resolution_clock::now(); // Time after file operation
-                chrono::duration<double, milli> duration_filees = end_filees - start_filees;
-                cout << "darbas su failais uztruko: " << duration_filees.count() << " ms" << endl;
                 break;
 
             }
-         case '6': {
-    chrono::time_point<chrono::high_resolution_clock> start_failas = chrono::high_resolution_clock::now(); //pradeda
+                 case '6': {
+             std::cout << "Iveskite kieki studentu, kuri norite sugeneruoti: ";
+             std::cin >> studentukiekis;
 
-    srand(time(0));
-    // pasirinkimo meniu
-    cout << "Pasirinkite, kurį failą norite sugeneruoti:" << endl;
-    cout << "1. kietiakai" << endl;
-    cout << "2. slabakai" << endl;
+             if (studentukiekis <= 0) {
+                 std::cerr << "neteisinga ivestis. iveskite teigiama skaiciu." << std::endl;
+                 return 1;
+             }
 
-    int fileChoice;
-    cout << "Jūsų pasirinkimas (1 arba 2): ";
-    cin >> fileChoice;
-    // tikrinam
-    if (fileChoice != 1 && fileChoice != 2) {
-        cout << "Klaidingas pasirinkimas. Pasirinkite 1 arba 2." << endl;
-        return 1;
-    }
+             auto pradziaGeneravimas = DabartinisLaikas(); // Pradinis laiko taškas generavimui
+             failuGeneravimas(studentukiekis, "studentai.txt");
+             auto pabaigaGeneravimas = DabartinisLaikas(); // Baigtinis laiko taškas generavimui
 
-    vector<string> choices;
-    choices.push_back("1 000");
-    choices.push_back("10 000");
-    choices.push_back("100 000");
-    choices.push_back("1 000 000");
-    choices.push_back("10 000 000");
+             auto pradziaNuskaitymas = DabartinisLaikas();// Pradinis laiko taškas nuskaitymui
+             Nuskaitymas("studentai.txt", students, studentukiekis);
+             auto pabaigaNuskaitymas = DabartinisLaikas(); // Baigtinis laiko taškas nuskaitymui
 
-    cout << "Pasirinkite kiek duomenų norite sugeneruoti:" << endl;
-    for (int i = 0; i < 5; ++i) {
-        cout << i + 1 << ". " << choices[i] << endl;
-    }
+             // Spausdiname laiko skirtumus
+             cout << "Failu generavimas užtruko: " << LaikoSkirtumas(pradziaGeneravimas, pabaigaGeneravimas) << " sekundžių." << endl;
+             cout << "Failu nuskaitymas užtruko: " << LaikoSkirtumas(pradziaNuskaitymas, pabaigaNuskaitymas) << " sekundžių." << endl;
 
-    int choice;
-    cout << "Jūsų pasirinkimas (1-5): ";
-    cin >> choice;
+             char pasirinkimas;
 
-    if (choice < 1 || choice > 5) {
-        cout << "Klaidingas pasirinkimas. Iveskite skaiciu nuo 1 iki 5." << endl;
-        return 1;
-    }
+             cout << "Pasirinkite, kaip norite matyti galutinį rezultatą:\n";
+             cout << "V - pagal vidurkį\n";
+             cout << "M - pagal medianą\n";
+             cout << "Jūsų pasirinkimas (V/M): ";
+             cin >> pasirinkimas;
 
-    int kiekis;
-    switch (choice) {
-        case 1: kiekis = 1000; 
-        break;
-        case 2: kiekis = 10000; 
-        break;
-        case 3: kiekis = 100000; 
-        break;
-        case 4: kiekis = 1000000; 
-        break;
-        case 5: kiekis = 10000000; 
-        break;
-    }
+             std::vector<Student> students;
 
-    string fileName;
-    if (fileChoice == 1){
-        fileName = "kietiakai.txt";
-    } else {
-        fileName = "slabakai.txt";
-    }
-    // atsidaro faila pagal vartotojo pasirinkima
-    ofstream outFile(fileName);
+             if (Nuskaitymas("studentai.txt", students, studentukiekis)) {
+                 calculateResults(students);
 
-    if (!outFile.is_open()) {
-        cout << "Klaida atidarant failą irasymui." << endl;
-        return 1;
-    }
-    //generuoja ir raso duom i faila
-    for (int i = 1; i <= kiekis; ++i) {
-        vector<int> grades;
-        for (int j = 0; j < 10; ++j) {
-            grades.push_back(generateRandomNumber(1, 10));
+                 auto pradziaIrasyti = DabartinisLaikas(); // Pradinis laiko taškas įrašymui
+                 rūšiuoja_ir_rašo_failus(students);
+                 auto pabaigaIrasyti = DabartinisLaikas(); // Baigtinis laiko taškas įrašymui
+
+                 // Spausdiname laiko skirtumus
+                 cout << "Duomenų įrašymas į failus užtruko: " << LaikoSkirtumas(pradziaIrasyti, pabaigaIrasyti) << " sekundžių." << endl;
+                 cout << "Duomenys sėkmingai išrūšiuoti ir išsaugoti į failus geruciai.txt ir bloguciai.txt." << std::endl;
+             } else {
+                 std::cerr << "Nepavyko nuskaityti duomenų iš failo." << std::endl;
+             }
+
+             return 0;
+                 }
+
+        case '7': {
+            cout << "Programa baigta." << endl;
+            break;
         }
-        double average = calculateAverage(grades);
-        // raso duomenis i faila pagal vidurki
-        if ((fileChoice == 1 && average >= 5.0) || (fileChoice == 2 && average < 5.0)) {
-            outFile << "vardas " << i << " pavarde " << i << " Vidurkis: " << average;
-            for (int j = 0; j < 10; ++j) {
-                outFile << " " << grades[j];
-            }
-            outFile << endl;
+        default:{
+            cout << "Klaidingas pasirinkimas. Prasome irasyti tinkama skaiciu." << endl;
+            break;
         }
-    }
-    //uzdaro faila
-    outFile.close();
-
-    cout << "Duomenys išsaugoti sekmingai į failą \"" << fileName << "\"." << endl;
-
-
-
-    chrono::time_point<chrono::high_resolution_clock> end_failas = chrono::high_resolution_clock::now(); // Time after file operation
-    chrono::duration<double, milli> duration_failas = end_failas - start_failas;
-    cout << "irasymas uztruko: " << duration_failas.count() << " ms" << endl;
-
-        break;
-         }
-             
-            case '7': {
-                cout << "Programa baigta." << endl;
-                break;
-            }
-            default:{
-                cout << "Klaidingas pasirinkimas. Prasome irasyti tinkama skaiciu." << endl;
-                break;
-            }
-        }
-     
-
-    
     }
     
+
+    }
     while (choice != '7');
-    ;
-    
-       chrono::time_point<chrono::high_resolution_clock> end_file = chrono::high_resolution_clock::now(); // End measuring time
-    chrono::duration<double, milli> duration = end_file - start_file;
-    cout << "visas programos vykdymo laikas: " << duration.count() << " milliseconds" << endl;
+
 
     return 0;
-    }
+
+
+}
