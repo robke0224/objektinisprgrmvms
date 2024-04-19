@@ -12,6 +12,38 @@ std::vector<Pazymiai> S, P, Z;
 
 int main ()
 {
+   // Test output
+    {
+        Pazymiai p("Jonas", "Dddd", 8.5, 9, {10, 9, 8}, 8.0, 8.5);
+        ostringstream oss;
+        oss << p;
+        string actualOutput = oss.str();
+        string expectedOutput = "Jonas Dddd 8.5 9 10 9 8 8 8.5";
+        if (actualOutput != expectedOutput) {
+            cerr << "Output testas nesekmingas!" << endl;
+            cerr << "Tikimasi: " << expectedOutput << endl;
+            cerr << "Gaunama : " << actualOutput << endl;
+            return 1;
+        }
+    }
+    // Test input
+    {
+        istringstream iss("Jonas Jonaitis 7.5 7 8 9 10 7 7.5");
+        Pazymiai p;
+        iss >> p;
+        if (p.getVar() != "Jonas" ||
+            p.getPav() != "Jonaitis" ||
+            p.getVid() != 7.5 ||
+            p.getEgz() != 7 ||
+            p.getPaz() != vector<int>{8, 9, 10} ||
+            p.getGalutinis() != 7.0 ||
+            p.getMed() != 7.5) {
+            cerr << "Input testas nesekmingas!" << endl;
+            return 1;
+        }
+    }
+    cout << "Visi testai sekmingi." << endl;
+
 
 
     while (true){
@@ -22,7 +54,8 @@ int main ()
         cout << "4. Nuskaityti is failo" << endl;
         cout << "5. Failu generavimas" << endl;
         cout << "6. Sugeneruotu failu skaiciavimas" << endl;
-        cout << "7. Programa baigta" << endl;
+        cout << "7. Klases testavimas" << endl;
+        cout << "8. Programa baigta" << endl;
         if (!(cin >> pasirinkimas)) {
             cout << "Klaida. Iveskite skaiciu nuo 1 iki 7. " << endl;
             cin.clear();
@@ -44,12 +77,15 @@ int main ()
 
                     cin>>xx;
                     C.setPav(xx);
+
                     if(C.getPav()=="4" || C.getVar()=="4"){
                         break;
                     }
+
                     cout<<"Iveskite "<<i+1<<" varda (noredami baigti spauskite 4):   "<<endl;
                     cin>>y;
                     C.setVar(y);
+
                     if(C.getPav()=="4" || C.getVar()=="4"){
                         break;
                     }
@@ -238,11 +274,13 @@ int main ()
                 int egg;
                 string vardai[] = {"Paulina", "Adriana", "Gitanas", "Donald", "Ugne", "Kamile", "Rugile", "Roberta", "Valdemaras", "Jurgis"};
                 string pavardes[] = {"Podgaiska", "Obama", "Trump", "Nauseda", "Sirokyte", "Mockute", "Zobelaite", "Macaite", "Jurpalyte", "Jankauskas"};
-string xx, yy;
+                string xx, yy;
                 while (qq != 1) {
                     Pazymiai C;
+
                     xx = pavardes[rand() % 10];
                     C.setPav(xx);
+
                     yy = vardai[rand() % 10];
                     C.setVar(yy);
                     cout << "Pavarde ir vardas: " << C.getPav() << " " << C.getVar() << endl;
@@ -369,8 +407,8 @@ string xx, yy;
                 int pv=0;
                 int numeris;
                 string wp;
-string xx, yy;
-int egg;
+                string xx, yy;
+                int egg;
                 cout<<"Pasirinkite is kurio failo norite nuskaityti: "<<endl;
                 cout<<"1. studentai10000 "<<"2. studentai100000 "<<"3. studentai1000000 "<<"4. kursiokai5 "<<endl;
 
@@ -539,39 +577,43 @@ int egg;
 
             case 6:{
                 Pazymiai C;
-    cout << "Enter the strategy (1, 2, 3, 4): ";
-    int strategy;
-    cin >> strategy;
+                cout << "Pasirinkite strategija 1, 2, 3, 4: ";
+                int strategy;
+                cin >> strategy;
 
-    const vector<string> filenames = {"1k.txt", "10k.txt", "100k.txt", "1kk.txt", "10kk.txt"};
-    const vector<string> lopukaiFilenames = {"lopukai1.txt", "lopukai2.txt", "lopukai3.txt", "lopukai4.txt", "lopukai5.txt"};
-    const vector<string> saunuoliukaiFilenames = {"saunuoliukai1.txt", "saunuoliukai2.txt", "saunuoliukai3.txt", "saunuoliukai4.txt", "saunuoliukai5.txt"};
+                const vector<string> filenames = {"1k.txt", "10k.txt", "100k.txt", "1kk.txt", "10kk.txt"};
+                const vector<string> lopukaiFilenames = {"lopukai1.txt", "lopukai2.txt", "lopukai3.txt", "lopukai4.txt", "lopukai5.txt"};
+                const vector<string> saunuoliukaiFilenames = {"saunuoliukai1.txt", "saunuoliukai2.txt", "saunuoliukai3.txt", "saunuoliukai4.txt", "saunuoliukai5.txt"};
 
-    for (int i = 0; i < filenames.size(); ++i) {
-        cout << filenames[i] << " :" << endl;
-        switch (strategy) {
-            case 1:
-                failuskaickstrategija1(filenames[i], C, S, P, Z);
+                for (size_t i = 0; i < filenames.size(); ++i) {
+                    cout << filenames[i] << " :" << endl;
+                    switch (strategy) {
+                        case 1:
+                            failuskaickstrategija1(filenames[i], C, S, P, Z);
+                            break;
+                        case 2:
+                            failuskaickstrategija2(filenames[i], C, P, Z);
+                            break;
+                        case 3:
+                            failuskaickstrategija3(filenames[i], C, S, P, Z);
+                            break;
+                        case 4:
+                            failuskaick(filenames[i], C, P, Z);
+                            break;
+                        default:
+                            cout << "Tokia strategija neegzistuoja!" << endl;
+                            break;
+                    }
+                    spausdintuvas(lopukaiFilenames[i], saunuoliukaiFilenames[i], P, Z);
+                }
                 break;
-            case 2:
-                failuskaickstrategija2(filenames[i], C, P, Z);
-                break;
-            case 3:
-                failuskaickstrategija3(filenames[i], C, S, P, Z);
-                break;
-            case 4:
-                failuskaick(filenames[i], C, P, Z);
-                break;
-            default:
-                cout << "Invalid strategy!" << endl;
-                break;
-        }
-        spausdintuvas(lopukaiFilenames[i], saunuoliukaiFilenames[i], P, Z);
-    }
-    break;
             }
 
             case 7:{
+                testai();
+                break;
+            }
+            case 8:{
                 cout<<"Programa baigta."<<endl;
                 return 0;
                 break;
