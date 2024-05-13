@@ -19,33 +19,33 @@ struct Student {
     string sur;
     double final_avg;
     double median;
-    deque<int> grades; // Changed vector to deque
+    deque<int> grades; 
     int exam_results;
-    deque<int> pazymiai; // Changed vector to deque
+    deque<int> pazymiai; 
     double egzaminoRezultatas;
     double gal_vid;
     double gal_med;
 
 };
 
-void generateRandomGrades(deque<Student>& students, double hw); // Changed vector to deque
-void generateRandomData(deque<Student>& students, double hw); // Changed vector to deque
-double calculateMedian(deque<int>& arr); // Changed vector to deque
-void readDataFromFile(deque<Student>& students, double& hw, int N); // Changed vector to deque
-void enterDataManually(deque<Student>& students, double hw); // Changed vector to deque
+void generateRandomGrades(deque<Student>& students, double hw); 
+void generateRandomData(deque<Student>& students, double hw); 
+double calculateMedian(deque<int>& arr); 
+void readDataFromFile(deque<Student>& students, double& hw, int N); 
+void enterDataManually(deque<Student>& students, double hw); 
 bool compareByName(const Student& a, const Student& b);
 bool compareBySurname(const Student& a, const Student& b);
 bool compareByMedian(const Student& a, const Student& b);
 bool compareByAvg(const Student& a, const Student& b);
 int generateRandomNumber(int min, int max);
-double calculateAverage(const deque<int>& pazymiai); // Changed vector to deque
+double calculateAverage(const deque<int>& pazymiai); 
 void failuGeneravimas(int studentu_kiekis, const std::string& failo_pavadinimas);
-bool Nuskaitymas(const std::string& failo_pavadinimas, std::deque<Student>& students, int studentukiekis); // Changed vector to deque
+bool Nuskaitymas(const std::string& failo_pavadinimas, std::deque<Student>& students, int studentukiekis); 
 std::chrono::steady_clock::time_point DabartinisLaikas();
 double LaikoSkirtumas(const std::chrono::steady_clock::time_point& pradzia, const std::chrono::steady_clock::time_point& pabaiga);
-void calculateResults(std::deque<Student>& stud); // Changed vector to deque
-void rūšiuoja_ir_rašo_failus(const std::deque<Student>& students); // Changed vector to deque
-double skaiciuotiVidurki(const std::deque<int>& pazymiai); // Changed vector to deque
+void calculateResults(std::deque<Student>& stud); 
+void rūšiuoja_ir_rašo_failus(const std::deque<Student>& students); 
+double skaiciuotiVidurki(const std::deque<int>& pazymiai); 
 bool arGerasStudentas(const Student& student);
 bool lygintiPagalVidurki(const Student& a, const Student& b);
 
