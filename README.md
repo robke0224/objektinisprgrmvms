@@ -1,6 +1,6 @@
 # objektinis_programavimas
 
-#Programos veikimas panaudojant vector konteinerį
+# Programos veikimas panaudojant vector konteinerį
 
 Paleidus programą vartotojas mato meniu:
 1.	Įvesti duomenis ranka
