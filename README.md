@@ -45,5 +45,6 @@ git push -u origin master
 <img width="445" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/c7d8af55-d8b1-4383-a09a-09296d8d0dee">
 
 
-
+# Testavimai
+*Pirmuoju testavimo atveju palyginsime dviejų programų, atitinkamai naudojančių **struct** ir **class**, veikimo spartą.*
 
