@@ -55,6 +55,8 @@ git push -u origin master
 | 1000000  | 7,845 s | 5,734 s | 0,223 s |
 | 10000000 | 40,024 s | 43,167 s | 2,752 s |
 
+----------------------------------------------------------------------------------------------------------------------------
+
 *class*
 
 |         | Nuskaitymas | Skirstymas | Rūšiavimas |
@@ -63,9 +65,9 @@ git push -u origin master
 | 10000000 | 62,001 s | 50,230 s | 5,753 s |
 
 
+----------------------------------------------------------------------------------------------------------------------------
 
-
-*Antruoju testavimu atveju palyginsime, kaip keičiasi programos sparta priklausomai nuo kompiliatoriaus optimizavimo lygio (jis nurodomas per flag'us (-O, -O1, -O2, -O3). Stebėsime, kaip kinta programos dydis (KB), priklausomai nuo naudojamų flag'ų.*
+*Antruoju testavimu atveju palyginsime, kaip keičiasi programos sparta priklausomai nuo kompiliatoriaus optimizavimo lygio (kuris nurodomas per flag'us (-O, -O1, -O2, -O3). Papildomai stebėsime, kaip kinta programos dydis (KB), priklausomai nuo naudojamų flag'ų.*
 
 *struct*
 
@@ -114,4 +116,12 @@ git push -u origin master
 | 1000000  | 1,558 s | 3,591 s | 0,108 s |
 | 10000000 | 16,992 s | 40,142 s | 1,497 s |
 
+-----------------------------------------------------------------------------------------------------------
+
+# Unix Executable File dydis 
+
+| -O | -O1 | -O2 | -O3 |
+|----------|----------|----------|----------|----------|
+| *struct* | 189 KB| 201 KB | 217 KB | 226 KB |
+| *class* | 197 KB | 214 KB | 226 KB | 257 KB |
 
