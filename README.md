@@ -25,3 +25,20 @@ Paleidus programą vartotojas mato meniu:
 *Šeštas* pasirinkimas vartotojo reikalauja pasirinkti kiekį studentų, kurį norima sugeneruoti. (Testavimai atlikti su  1000, 10000, 100000, 1000000, 10000000 duomenų įrašų faile.) Įvedus pasirinkimą programa praneša vartotojui, jei duomenys sugeneruoti sėkmingai. (Duomenys generuojami atskirame faile „studentai.txt“) Programa skaičiuoja laiką, kiek užtruko sugeneruoti failą,  bei kiek užtruko failą nuskaityti. Po pranešimo vartotojas gali pasirinkti, kaip nori rūšiuoti duomenis – pagal vidurkį ar pagal medianą. Po vartotojo pasirinkimo atitinkamai apskaičiuojamas kiekivieno studento vidurkis arba mediana, tada studentai rūšiuojami į „gerus“ (kurių vidurkis 5 ir daugiau) bei į „blogus“ (kurių vidurkis mažiau nei 5). Pateikiamas laikas, kiek užtruko studentų rūšiavimas bei įrašymas į failus.
 
 *Septintas* pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
+
+
+# 	Repozitorijos klonavimas
+
+Repozitoriją „objektinis_programavimas“ nuklonavau į savo kompiuterį. Tam terminale panaudojau komandą 
+
+git clone https://github.com/robke0224/objektinis_programavimas.git
+
+Tada sukūriau naują repozitoriją „objektinisprgrmvms“, toliau naudojau atitinkamas komandas:
+
+git remote set-url origin https://github.com/robke0224/objektinisprgrmvms.git
+
+git push -u origin master
+
+
+
+
