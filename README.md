@@ -122,6 +122,6 @@ git push -u origin master
 
 | -O | -O1 | -O2 | -O3 |
 |----------|----------|----------|----------|----------|
-| *struct* | 189 KB| 201 KB | 217 KB | 226 KB |
+| *struct* | 189 KB | 201 KB | 217 KB | 226 KB |
 | *class* | 197 KB | 214 KB | 226 KB | 257 KB |
 
