@@ -48,3 +48,11 @@ git push -u origin master
 # Testavimai
 *Pirmuoju testavimo atveju palyginsime dviejų programų, atitinkamai naudojančių **struct** ir **class**, veikimo spartą su 1000000 ir 10000000 dydžio failais.*
 
+*struct*
+
+|         | Nuskaitymas | Skirstymas | Rūšiavimas |
+|----------|----------|----------|----------|
+| 1000000  | 7,845 s | 5,734 s | 0,223 s |
+| 10000000 | 40,024 s | 43,167 s | 2,752 s |
+
+
