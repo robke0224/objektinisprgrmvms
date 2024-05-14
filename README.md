@@ -46,5 +46,5 @@ git push -u origin master
 
 
 # Testavimai
-*Pirmuoju testavimo atveju palyginsime dviejų programų, atitinkamai naudojančių **struct** ir **class**, veikimo spartą.*
+*Pirmuoju testavimo atveju palyginsime dviejų programų, atitinkamai naudojančių **struct** ir **class**, veikimo spartą su 1000000 ir 10000000 dydžio failais.*
 
