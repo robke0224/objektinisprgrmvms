@@ -40,5 +40,10 @@ git remote set-url origin https://github.com/robke0224/objektinisprgrmvms.git
 git push -u origin master
 
 
+# Testavimo sistemos parametrai
+
+<img width="445" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/c7d8af55-d8b1-4383-a09a-09296d8d0dee">
+
+
 
 
