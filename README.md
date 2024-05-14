@@ -9,17 +9,19 @@ Paleidus programą vartotojas mato meniu:
 4.	Nuskaityti duomenis iš failo ir duomenis išvesti terminale
 5.	Nuskaityti duomenis iš failo ir duomenis išvesti atskirame faile
 6.	Įveskite kiekį studentų, kurį norite sugeneruoti 
-7.	Baigti programa
-Pasirinkus pirmą variantą vartotojas pasirenka, kokį kiekį studentų nori įvesti ,tada atitinkamam kiekiui studentų prašoma įvesti ir vardus, pavardes, paklausiama, kokį kiekį namų darbų vartotojas nori įvesti, jį įvedus programa išveda įvestus duomenis terminale.
+7.	Baigti programą
 
-Pasirinkus antrą variantą pradžia išlieka tokia pat, tačiau įvedus norimą namų darbų pažymių kiekį, programa juos sugeneruoja atsitiktinai.
+   
+**Pasirinkus** pirmą variantą vartotojas pasirenka, kokį kiekį studentų nori įvesti ,tada atitinkamam kiekiui studentų prašoma įvesti ir vardus, pavardes, paklausiama, kokį kiekį namų darbų vartotojas nori įvesti, jį įvedus programa išveda įvestus duomenis terminale.
 
-Pasirinkus trečią variantą programa atsitiktinai generuoja vardus, pavardes, ir pažymius, galima pasirinkti norima matyti medianą ar vidurkį.
+**Pasirinkus** antrą variantą pradžia išlieka tokia pat, tačiau įvedus norimą namų darbų pažymių kiekį, programa juos sugeneruoja atsitiktinai.
 
-Pasirinkus ketvirtą variantą programa nuskaito jau esamus failus, įvedus skaičių duomenų, kurį norima nuskaityti, programa klausia, ar norima matyti medianą ar vidurkį. Tada galima uždėti pasitinktiną filtrą – duomenis rūšiuoti pagal vardą, pavardę, medianą ar vidurkį. Po atliktų pasirinkimų duomenys išvedami terminale.
+**Pasirinkus** trečią variantą programa atsitiktinai generuoja vardus, pavardes, ir pažymius, galima pasirinkti norima matyti medianą ar vidurkį.
 
-Pasirinkus penktą variantą pradžia išlieka identiška ketvirto pasirinkimo atveju, tačiau duomenys išvedami į atskirą, naujai sukuriamą failą.
+**Pasirinkus** ketvirtą variantą programa nuskaito jau esamus failus, įvedus skaičių duomenų, kurį norima nuskaityti, programa klausia, ar norima matyti medianą ar vidurkį. Tada galima uždėti pasitinktiną filtrą – duomenis rūšiuoti pagal vardą, pavardę, medianą ar vidurkį. Po atliktų pasirinkimų duomenys išvedami terminale.
 
-Šeštas pasirinkimas vartotojo reikalauja pasirinkti kiekį studentų, kurį norima sugeneruoti. (Testavimai atlikti su  1000, 10000, 100000, 1000000, 10000000 duomenų įrašų faile.) Įvedus pasirinkimą programa praneša vartotojui, jei duomenys sugeneruoti sėkmingai. (Duomenys generuojami atskirame faile „studentai.txt“) Programa skaičiuoja laiką, kiek užtruko sugeneruoti failą,  bei kiek užtruko failą nuskaityti. Po pranešimo vartotojas gali pasirinkti, kaip nori rūšiuoti duomenis – pagal vidurkį ar pagal medianą. Po vartotojo pasirinkimo atitinkamai apskaičiuojamas kiekivieno studento vidurkis arba mediana, tada studentai rūšiuojami į „gerus“ (kurių vidurkis 5 ir daugiau) bei į „blogus“ (kurių vidurkis mažiau nei 5). Pateikiamas laikas, kiek užtruko studentų rūšiavimas bei įrašymas į failus.
+**Pasirinkus** penktą variantą pradžia išlieka identiška ketvirto pasirinkimo atveju, tačiau duomenys išvedami į atskirą, naujai sukuriamą failą.
 
-Septintas pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
+**Šeštas** pasirinkimas vartotojo reikalauja pasirinkti kiekį studentų, kurį norima sugeneruoti. (Testavimai atlikti su  1000, 10000, 100000, 1000000, 10000000 duomenų įrašų faile.) Įvedus pasirinkimą programa praneša vartotojui, jei duomenys sugeneruoti sėkmingai. (Duomenys generuojami atskirame faile „studentai.txt“) Programa skaičiuoja laiką, kiek užtruko sugeneruoti failą,  bei kiek užtruko failą nuskaityti. Po pranešimo vartotojas gali pasirinkti, kaip nori rūšiuoti duomenis – pagal vidurkį ar pagal medianą. Po vartotojo pasirinkimo atitinkamai apskaičiuojamas kiekivieno studento vidurkis arba mediana, tada studentai rūšiuojami į „gerus“ (kurių vidurkis 5 ir daugiau) bei į „blogus“ (kurių vidurkis mažiau nei 5). Pateikiamas laikas, kiek užtruko studentų rūšiavimas bei įrašymas į failus.
+
+**Septintas** pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
