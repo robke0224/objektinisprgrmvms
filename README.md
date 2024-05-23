@@ -28,4 +28,14 @@ Septintas pasirinkimas paleidžia testavimą.
 
 Aštuntas pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
 
+# class vs bazine ir derived 
 
+| class | Nuskaitymas | Skirstymas | Rūšiavimas |
+|----------|----------|----------|----------|
+| 1000000  | 6,012 s | 0,830 s | 2,518 s |
+| 10000000 | 45,833 s | 4,850 s | 20,175 s |
+
+| b ir d | Nuskaitymas | Skirstymas | Rūšiavimas |
+|----------|----------|----------|----------|
+| 1000000  | 9,213 s | 1,289 s | 0,973 s |
+| 10000000 | 71,866 s | 7,818 s | 15,619 s |
