@@ -379,4 +379,90 @@ void rūšiuoja_ir_rašo_failus(std::vector<Student>& students) {
     } else {
         std::cerr << "Nepavyko atidaryti failo bloguciai.txt";
     }
+};
+
+void testavimoRezultatai(bool success, const std::string& testName) {
+    if (success) {
+        std::cout << "Test '" << testName << "' passed" << std::endl;
+    } else {
+        std::cerr << "Test '" << testName << "' failed" << std::endl;
+    }
+}
+
+void testas() {
+    // Test default constructor
+    Student s;
+    assert(s.getName().empty());
+    assert(s.getSurname().empty());
+    assert(s.getExamResult() == 0);
+    assert(s.getFinalAvg() == 0.0);
+    assert(s.getFinalMedian() == 0.0);
+
+    // Test setters and getters
+    string name = "J";
+    string surname = "D";
+    int examResult = 8;
+    double finalAvg = 7;
+    double finalMedian = 8;
+
+    s.setName(name);
+    assert(s.getName() == name);
+
+    s.setSurname(surname);
+    assert(s.getSurname() == surname);
+
+    s.setExamResult(examResult);
+    assert(s.getExamResult() == examResult);
+
+    s.setFinalAvg(finalAvg);
+    assert(s.getFinalAvg() == finalAvg);
+
+    s.setFinalMedian(finalMedian);
+    assert(s.getFinalMedian() == finalMedian);
+
+
+    // Test copy constructor
+    Student originalus;
+    
+    originalus.setName(name);
+    originalus.setSurname(surname);
+    originalus.setExamResult(7);
+    Student kopija = originalus;
+    assert(kopija.getName() == "J");
+    assert(kopija.getSurname() == "D");
+    assert(kopija.getExamResult() == 7);
+    testavimoRezultatai(true, "kopijavimo konstruktorius");
+
+    // Test move constructor
+    Student movintas = std::move(originalus);
+    assert(movintas.getName() == "J");
+    assert(movintas.getSurname() == "D");
+    assert(movintas.getExamResult() == 7);
+    assert(originalus.getName().empty());
+    assert(originalus.getSurname().empty());
+    assert(originalus.getExamResult() == 0);
+    testavimoRezultatai(true, "move konstruktorius");
+
+    // Test copy assignment
+    Student originalus2;
+    originalus2.setName(name);
+    originalus2.setSurname(surname);
+    originalus2.setExamResult(10);
+    Student kopija2;
+    kopija2 = originalus2;
+    assert(kopija2.getName() == "J");
+    assert(kopija2.getSurname() == "D");
+    assert(kopija2.getExamResult() == 10);
+    testavimoRezultatai(true, "kopijavimo assignmentas");
+
+    // Test move assignment
+    Student movintas2;
+    movintas2 = std::move(originalus2);
+    assert(movintas2.getName() == "J");
+    assert(movintas2.getSurname() == "D");
+    assert(movintas2.getExamResult() == 10);
+    assert(originalus2.getName().empty());
+    assert(originalus2.getSurname().empty());
+    assert(originalus2.getExamResult() == 0);
+    testavimoRezultatai(true, "move assignmentas");
 }
