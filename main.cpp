@@ -19,7 +19,8 @@
         cout << "4. Nuskaityti duomenis is failo ir duomenis isvesti terminale" << endl;
         cout << "5. Nuskaityti duomenis is failo ir duomenis isvesti atskirame faile" << endl;
         cout << "6. Iveskite kieki studentu, kuri norite sugeneruoti " << endl;
-        cout << "7. Baigti programa" << endl;
+        cout << "7. Testavimas" << endl;
+        cout << "8. Baigti programa" << endl;
         cout << "Jusu pasirinkimas: ";
         while (!(cin >> choice)){
             cout<< "Klaida. Prasome ivesti skaiciu, atitinkanti meniu opcijas"<< endl;
@@ -381,7 +382,13 @@
 }
 
 
-        case '7': {
+
+case '7':{
+    testas();
+    return 0;
+}
+
+        case '8': {
             cout << "Programa baigta." << endl;
             break;
         }
