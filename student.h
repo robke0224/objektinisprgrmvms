@@ -13,6 +13,8 @@
 #include <random>
 #include <ctime>
 #include <cstring>
+#include <cassert>
+#include <utility>
 
 
 using namespace std;
@@ -71,8 +73,8 @@ public:
         return *this;
     }
 
-    // Move constructor
-    Student(Student&& other):
+      // Move constructor
+    Student(Student&& other) :
         grades(std::move(other.grades)),
         pazymiai(std::move(other.pazymiai)),
         name(std::move(other.name)),
@@ -85,6 +87,8 @@ public:
         other.egzaminoRezultatas = 0.0;
         other.gal_vid = 0.0;
         other.gal_med = 0.0;
+        other.name.clear();
+        other.sur.clear();
     }
 
     // Move assignment operator
@@ -103,6 +107,8 @@ public:
             other.egzaminoRezultatas = 0.0;
             other.gal_vid = 0.0;
             other.gal_med = 0.0;
+            other.name.clear();
+            other.sur.clear();
         }
         return *this;
     }
@@ -112,7 +118,7 @@ public:
         name = vardas;
     }
 
-    std::string getName() const {
+    string getName() const {
         return name;
     }
 
@@ -120,7 +126,7 @@ public:
         sur = pavarde;
     }
 
-    std::string getSurname() const {
+    string getSurname() const {
         return sur;
     }
 
@@ -152,15 +158,15 @@ public:
         pazymiai.push_back(naujasnd);
     }
 
-    int getSingleGrade(const std::vector<int>& ND, int i) const {
+    int getSingleGrade(const vector<int>& ND, int i) const {
         return pazymiai[i];
     }
 
-    void setGrades(const std::vector<int>& ND) {
+    void setGrades(const vector<int>& ND) {
         pazymiai = ND;
     }
 
-    std::vector<int> getGrades() const {
+    vector<int> getGrades() const {
         return pazymiai;
     }
 
@@ -243,6 +249,7 @@ double skaiciuotiVidurki(const std::vector<int>& pazymiai);
 bool arGerasStudentas(const Student& student);
 bool lygintiPagalVidurki(const Student& a, const Student& b);
 void rūšiuoja_ir_rašo_failus(std::vector<Student>& students);
+void testas();
 
 
 
