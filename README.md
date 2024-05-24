@@ -42,4 +42,6 @@ Aštuntas pasirinkimas užbaigia programą bei išveda bendrą visos programos v
 <img width="315" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/fcf10a2c-a53a-4e92-b54d-dd7a1c1ebf0a">
 
 
+Pakeitus duomenis testavime, matome, kad randa klaidą
+<img width="552" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/e12ce80d-8d86-4819-b8a8-b29c3e299dc2">
 
