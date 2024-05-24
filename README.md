@@ -35,3 +35,11 @@ Aštuntas pasirinkimas užbaigia programą bei išveda bendrą visos programos v
 <img width="313" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/9f7c2f81-c25f-4d87-b5c6-748309d67084">
 
 Įvestyje pakeitus skaičius arba vardus, testas nesėkmingas.
+
+
+# Testavimai
+
+<img width="315" alt="image" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/fcf10a2c-a53a-4e92-b54d-dd7a1c1ebf0a">
+
+
+
