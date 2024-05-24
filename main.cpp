@@ -400,7 +400,7 @@ case '7':{
 
 
     }
-    while (choice != '7');
+    while (choice != '8');
       auto pabaigaPrograma = DabartinisLaikas(); // Baigtinis laiko taškas programai
       cout << "Programos vykdymas užtruko: " << LaikoSkirtumas(pradziaPrograma, pabaigaPrograma) << " sekundžių." << endl;
 
