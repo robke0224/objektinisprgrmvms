@@ -1,3 +1,3 @@
-kjs# objektinis_programavimas
+# objektinis_programavimas
 
 
