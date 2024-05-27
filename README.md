@@ -52,16 +52,22 @@ Suinstaliavus doxygen reikejo kode sudelioti komentarus, kuriuos doxygen identif
 
 Kad sugeneruociau PDF dokumentacijos faila instaliavau MiKTeX, kaip ta padaryti placiau rasoma cia: https://miktex.org/download
 
+
 Instaliavus MiKTeX, komandineje eiluteje darbas atrode taip:
+
 1. naudodama cd komanda atsidariau jau padaryta latex aplanka
    
     1.1. cd desktop/du/latex
 2. tam, kad sugeneruotu pdf faila is latex, rasiau tokias komandas
    
     2.1.  pdflatex refman.tex
+   
           makeindex refman.idx
+   
           pdflatex refman.tex
+   
           pdflatex refman.tex
+   
 
 REZULTATAS: latex aplanke sugeneruojamas pdf failas refman.pdf, kuris ir yra dokumentacija pdf formatu
 
@@ -70,6 +76,7 @@ REZULTATAS: latex aplanke sugeneruojamas pdf failas refman.pdf, kuris ir yra dok
 # TESTAVIMAS
 
 Testavimui ivykdyti naudojau catch2 testus, juos parsisiunciau is cia: https://github.com/catchorg/Catch2
+
 Siunciausi naujausia v2.13.10 releasa, kad veiktu su macOS operacine sistema.
 
 testavimo rezultatai:
