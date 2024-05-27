@@ -54,8 +54,10 @@ Kad sugeneruociau PDF dokumentacijos faila instaliavau MiKTeX, kaip ta padaryti 
 
 Instaliavus MiKTeX, komandineje eiluteje darbas atrode taip:
 1. naudodama cd komanda atsidariau jau padaryta latex aplanka
+   
     1.1. cd desktop/du/latex
 2. tam, kad sugeneruotu pdf faila is latex, rasiau tokias komandas
+   
     2.1.  pdflatex refman.tex
           makeindex refman.idx
           pdflatex refman.tex
