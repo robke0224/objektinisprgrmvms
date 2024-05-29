@@ -10,8 +10,9 @@ Paleidus programą vartotojas mato meniu:
 4. Nuskaityti duomenis iš failo ir duomenis išvesti terminale
 5. Nuskaityti duomenis iš failo ir duomenis išvesti atskirame faile
 6. Įveskite kiekį studentų, kurį norite sugeneruoti
-7. Testavimas
-8. Baigti programą
+7. Vector konteinerio testavimas
+8. Klases testavimas
+9. Baigti programą
 Pasirinkus pirmą variantą vartotojas pasirenka, kokį kiekį studentų nori įvesti ,tada atitinkamam kiekiui studentų prašoma įvesti ir vardus, pavardes, paklausiama, kokį kiekį namų darbų vartotojas nori įvesti, jį įvedus programa išveda įvestus duomenis terminale.
 
 Pasirinkus antrą variantą pradžia išlieka tokia pat, tačiau įvedus norimą namų darbų pažymių kiekį, programa juos sugeneruoja atsitiktinai.
@@ -24,9 +25,9 @@ Pasirinkus penktą variantą pradžia išlieka identiška ketvirto pasirinkimo a
 
 Šeštas pasirinkimas vartotojo reikalauja pasirinkti kiekį studentų, kurį norima sugeneruoti. (Testavimai atlikti su 1000, 10000, 100000, 1000000, 10000000 duomenų įrašų faile.) Įvedus pasirinkimą programa praneša vartotojui, jei duomenys sugeneruoti sėkmingai. (Duomenys generuojami atskirame faile „studentai.txt“) Programa skaičiuoja laiką, kiek užtruko sugeneruoti failą, bei kiek užtruko failą nuskaityti. Po pranešimo vartotojas gali pasirinkti, kaip nori rūšiuoti duomenis – pagal vidurkį ar pagal medianą. Po vartotojo pasirinkimo atitinkamai apskaičiuojamas kiekivieno studento vidurkis arba mediana, tada studentai rūšiuojami į „gerus“ (kurių vidurkis 5 ir daugiau) bei į „blogus“ (kurių vidurkis mažiau nei 5). Pateikiamas laikas, kiek užtruko studentų rūšiavimas bei įrašymas į failus.
 
-Septintas pasirinkimas paleidžia testavimą.
+Septintas ir astuntas pasirinkimai paleidžia testavimą.
 
-Aštuntas pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
+Devintas pasirinkimas užbaigia programą bei išveda bendrą visos programos veikimo laiką.
 
 # class vs bazine ir derived 
 
@@ -84,6 +85,81 @@ testavimo rezultatai:
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
+
+# v3.0
+
+Testavimai, palyginimas kiek vidutiniškai laiko užtrunka std::vector tipo ir mano Vector tipo tuščius vektorius užpildyti: 10000, 100000, 1000000, 10000000 ir 100000000 int elementų naudojant push_back() funkciją.
+<img width="634" alt="Screenshot 2024-05-29 at 08 26 31" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/00035d65-8e0e-469e-ba3a-29ffedc0f4f2">
+
+<img width="799" alt="Screenshot 2024-05-29 at 08 25 43" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/c23815b6-da9d-4308-bd5b-dbb5377e7ad1">
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+push back
+
+<img width="634" alt="Screenshot 2024-05-29 at 08 31 18" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/d4f0c535-2350-4115-b027-c4473d2f54c4">
+
+pop back
+
+<img width="634" alt="Screenshot 2024-05-29 at 08 31 33" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/29e3f196-eddd-4091-91a8-b191fdf768f1">
+
+resize
+
+<img width="634" alt="Screenshot 2024-05-29 at 08 34 43" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/9018efc2-fece-44e8-a8b8-3690d7c2235b">
+
+insert
+
+<img width="634" alt="Screenshot 2024-05-29 at 08 36 17" src="https://github.com/robke0224/objektinisprgrmvms/assets/154459735/a5e2aa02-eb26-4117-adfa-f7189a3c517c">
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Palyginu kiek kartų įvyksta konteinerių (Vector ir std::vector) atminties perskirstymai užpildant 100 000 000 elementų.
+
+        unsigned int sz = 100000000;  // 10000, 100000, 1000000, 10000000, 100000000
+        std::vector<int> v1;
+        int std_vector_perskirstymas = 0;
+        for (int i = 1; i <= sz; ++i) {
+            v1.push_back(i);
+            if (v1.capacity() == v1.size()) {
+                ++std_vector_perskirstymas;
+            }
+        }
+        cout << "Atmintis buvo perskirstyta " << std_vector_perskirstymas << " kartu su std::vector" << endl;
+
+        Vector<int> v2;
+        int vector_perskirstymas = 0;
+        for (int i = 1; i <= sz; ++i) {
+            v2.push_back(i);
+            if (v2.capacity() == v2.size()) {
+                ++vector_perskirstymas;
+            }
+        } 
+        cout << "Atmintis buvo perskirstyta " << vector_perskirstymas << " kartu su Vector" << endl;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Spartos analize
+
+
+| Vector Size | Nuskaitymas | Skirstymas | Rūšiavimas | Išvedimas | 
+|-------------|-------------|------------|------------|-----------|
+| 100,000     | 0.147 s     | 0.026 s    | 0.078 s    | 0.300 s   |
+| 1,000,000   | 2.972 s     | 0.368 s    | 0.899 s    | 3.081 s   | 
+| 10,000,000  | 25.211 s    | 3.701 s    | 11.602 s   | 48,204 s  |
+
+
+| std::vector Size | Nuskaitymas | Skirstymas | Rūšiavimas | Išvedimas |
+|------------------|-------------|------------|------------|-----------|
+| 100,000          | 0.141 s     | 0.013 s    | 0.030 s    | 0.356 s   |
+| 1,000,000        | 3.828 s     | 0.368 s    | 0.326 s    | 4.011 s   |
+| 10,000,000       | 26.233 s    | 2.962 s    | 3.555 s    | 38.314 s  |
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
