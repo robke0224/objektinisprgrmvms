@@ -1,3 +1,11 @@
+/**
+ * @file Student.h
+ * @brief Header file containing the definitions for the Zmogus and Student classes, and associated functions.
+ *
+ * This file defines the abstract base class Zmogus and the derived class Student, 
+ * along with various utility functions for handling student data.
+ */
+
 #ifndef STUDENT_H
 #define STUDENT_H
 
@@ -17,160 +25,147 @@
 #include <utility>
 #include <chrono>
 
-
 using namespace std;
 using namespace std::chrono;
 
-// Abstrakti bazinė klasė žmogui
+/**
+ * @brief Abstract base class representing a person.
+ */
 class Zmogus {
 protected:
-    string name;
-    string surname;
+    string name;    /**< Name of the person */
+    string surname; /**< Surname of the person */
 
 public:
-    // Abstraktūs metodai, kuriuos reikės realizuoti išvestinėse klasėse
+    /**
+     * @brief Sets the name of the person.
+     * @param vardas The name to set.
+     */
     virtual void setName(const string& vardas) = 0;
+
+    /**
+     * @brief Gets the name of the person.
+     * @return The name of the person.
+     */
     virtual string getName() const = 0;
+
+    /**
+     * @brief Sets the surname of the person.
+     * @param pavarde The surname to set.
+     */
     virtual void setSurname(const string& pavarde) = 0;
+
+    /**
+     * @brief Gets the surname of the person.
+     * @return The surname of the person.
+     */
     virtual string getSurname() const = 0;
 
-    // Virtualus destruktorius, nes tai abstrakti bazinė klasė
+    /**
+     * @brief Virtual destructor.
+     */
     virtual ~Zmogus() {}
 };
 
-// Studento klasė, kuri paveldi iš žmogaus bazinės klasės
+/**
+ * @brief Class representing a student, derived from Zmogus.
+ */
 class Student : public Zmogus {
 private:
-    Vector<int> grades;
-    int exam_result;
-    double final_avg;
-    double final_median;
+    Vector<int> grades; /**< Grades of the student */
+    int exam_result;    /**< Exam result of the student */
+    double final_avg;   /**< Final average of the student */
+    double final_median;/**< Final median of the student */
 
 public:
-    // Konstruktorius
-    Student() :
-        grades(),
-        exam_result(0),
-        final_avg(0.0),
-        final_median(0.0) {}
+    /**
+     * @brief Constructor initializing the student with default values.
+     */
+    Student();
 
-    // Destruktorius
-    ~Student() {}
+    /**
+     * @brief Destructor.
+     */
+    ~Student();
 
-    // Metodai, kurie realizuoja abstrakčius metodus iš bazinės klasės
-    void setName(const string& vardas) override {
-        name = vardas;
-    }
+    // Implementation of abstract methods from Zmogus
+    void setName(const string& vardas) override;
+    string getName() const override;
+    void setSurname(const string& pavarde) override;
+    string getSurname() const override;
 
-    string getName() const override {
-        return name;
-    }
+    /**
+     * @brief Sets the exam result of the student.
+     * @param egzaminas The exam result to set.
+     */
+    void setExamResult(int egzaminas);
 
-    void setSurname(const string& pavarde) override {
-        surname = pavarde;
-    }
+    /**
+     * @brief Gets the exam result of the student.
+     * @return The exam result.
+     */
+    int getExamResult() const;
 
-    string getSurname() const override {
-        return surname;
-    }
+    /**
+     * @brief Sets the final average grade of the student.
+     * @param Gal_vid The final average grade to set.
+     */
+    void setFinalAvg(double Gal_vid);
 
-    // Papildomi metodai skirti darbui su studento duomenimis
-    void setExamResult(int egzaminas) {
-        exam_result = egzaminas;
-    }
+    /**
+     * @brief Gets the final average grade of the student.
+     * @return The final average grade.
+     */
+    double getFinalAvg() const;
 
-    int getExamResult() const {
-        return exam_result;
-    }
+    /**
+     * @brief Sets the final median grade of the student.
+     * @param Gal_med The final median grade to set.
+     */
+    void setFinalMedian(double Gal_med);
 
-    void setFinalAvg(double Gal_vid) {
-        final_avg = Gal_vid;
-    }
+    /**
+     * @brief Gets the final median grade of the student.
+     * @return The final median grade.
+     */
+    double getFinalMedian() const;
 
-    double getFinalAvg() const {
-        return final_avg;
-    }
+    /**
+     * @brief Adds a single grade to the student's grades.
+     * @param naujasnd The grade to add.
+     */
+    void setSingleGrade(int naujasnd);
 
-    void setFinalMedian(double Gal_med) {
-        final_median = Gal_med;
-    }
+    /**
+     * @brief Gets a single grade of the student.
+     * @param i The index of the grade to get.
+     * @return The grade at index i.
+     */
+    int getSingleGrade(int i) const;
 
-    double getFinalMedian() const {
-        return final_median;
-    }
+    /**
+     * @brief Sets the grades of the student.
+     * @param ND The grades to set.
+     */
+    void setGrades(const Vector<int>& ND);
 
-    void setSingleGrade(int naujasnd) {
-        grades.push_back(naujasnd);
-    }
+    /**
+     * @brief Gets the grades of the student.
+     * @return The grades of the student.
+     */
+    Vector<int> getGrades() const;
 
-    int getSingleGrade(int i) const {
-        return grades[i];
-    }
+    /**
+     * @brief Clears all data of the student.
+     */
+    void clearData();
 
-    void setGrades(const Vector<int>& ND) {
-        grades = ND;
-    }
-
-    Vector<int> getGrades() const {
-        return grades;
-    }
-
-    void clearData() {
-        grades.clear();
-        exam_result = 0;
-        final_avg = 0.0;
-        final_median = 0.0;
-    }
-
-
- // Input operatorius
-
-    friend std::istream& operator>>(istream& in, Student& student) {
-        string vardas, pavarde;
-        int egzaminas;
-
-        if (!(in >> vardas >> pavarde >> egzaminas)){
-            in.clear();
-            in.ignore(numeric_limits<streamsize>::max(), '\n');
-            return in;
-        }
-        in >> vardas >> pavarde >> egzaminas;
-        student.setName(vardas);
-        student.setSurname(pavarde);
-        student.setExamResult(egzaminas);
-
-        /*student.pazymiai.clear();
-        cout << "ivesti pazymius (norint baigti ivesti -1): ";
-        int grade;
-        while (in >> grade && grade != -1) {
-            student.pazymiai.push_back(grade);
-        }
-
-        if (in.fail() && !in.eof()){
-            in.clear();
-            in.ignore(numeric_limits<streamsize>::max()), '\n';
-*/
-        return in;
-    }
-
-
-//output operatorius
-
-friend ostream& operator<<(ostream& out, const Student& student) {
-    out << "Vardas: " << student.getName() << endl;
-    out << "Pavarde: " << student.getSurname() << endl;
-    out << "Egzamino rezultatas: " << student.getExamResult() << endl;
-    out << "Pazymiai: ";
-    Vector<int> grades = student.getGrades();
-    for (int i = 0; i<grades.size(); i++){
-        out << grades[i] << " ";
-    }
-    out << endl;
-    return out;
-}
+    // Friend functions for input and output operations
+    friend std::istream& operator>>(istream& in, Student& student);
+    friend std::ostream& operator<<(ostream& out, const Student& student);
 };
 
-
+// Function declarations
 void generateRandomGrades(Vector<Student>& students, double hw);
 void generateRandomData(Vector<Student>& students, double hw);
 double calculateMedian(Vector<int>& arr);
@@ -195,8 +190,4 @@ void testas();
 void testStdVectorPerformance();
 void testCustomVectorPerformance();
 
-
-
-
-
-#endif
+#endif // STUDENT_H
